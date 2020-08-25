@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, Redirect } from 'react-router-dom'
 
 const styles = {
-
+  avatar: {
+    width: "100px"
+  }
 }
 
 function Home () {
@@ -25,7 +27,7 @@ function Home () {
                 <ul className="list-unstyled friend-list">
                   <li className="active grey lighten-3 p-2">
                     <a href="#" className="d-flex justify-content-between">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                       <div className="text-small">
                         <strong>John Doe</strong>
                         <p className="last-message text-muted">Hello, Are you there?</p>
@@ -38,7 +40,7 @@ function Home () {
                   </li>
                   <li className="p-2">
                     <a href="#" className="d-flex justify-content-between">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                       <div className="text-small">
                         <strong>Danny Smith</strong>
                         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
@@ -51,7 +53,7 @@ function Home () {
                   </li>
                   <li className="p-2">
                     <a href="#" className="d-flex justify-content-between">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                       <div className="text-small">
                         <strong>Alex Steward</strong>
                         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
@@ -64,7 +66,7 @@ function Home () {
                   </li>
                   <li className="p-2">
                     <a href="#" className="d-flex justify-content-between">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-3.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-3.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                       <div className="text-small">
                         <strong>Ashley Olsen</strong>
                         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
@@ -77,7 +79,7 @@ function Home () {
                   </li>
                   <li className="p-2">
                     <a href="#" className="d-flex justify-content-between">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-4.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-4.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                       <div className="text-small">
                         <strong>Kate Moss</strong>
                         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
@@ -90,9 +92,9 @@ function Home () {
                   </li>
                   <li className="p-2">
                     <a href="#" className="d-flex justify-content-between">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <img style={styles.avatar} src="https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                       <div className="text-small">
-                        <strong>Lara Croft</strong>
+                        <strong>Dustin Irving</strong>
                         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
                       </div>
                       <div className="chat-footer">
@@ -103,9 +105,9 @@ function Home () {
                   </li>
                   <li className="p-2">
                     <a href="#" className="d-flex justify-content-between">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <img style={styles.avatar} src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                       <div className="text-small">
-                        <strong>Brad Pitt</strong>
+                        <strong>Diego Lehyt</strong>
                         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
                       </div>
                       <div className="chat-footer">
@@ -125,10 +127,10 @@ function Home () {
 
                 <ul className="list-unstyled chat-1 scrollbar-light-blue">
                   <li className="d-flex justify-content-between mb-4">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                    <img style={styles.avatar} src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                     <div className="chat-body white p-3 ml-2 z-depth-1">
                       <div className="header">
-                        <strong className="primary-font">Brad Pitt</strong>
+                        <strong className="primary-font">Diego Lehyt</strong>
                         <small className="pull-right text-muted"><i className="far fa-clock"></i> 12 mins ago</small>
                       </div>
                       <hr className="w-100"/>
@@ -141,7 +143,7 @@ function Home () {
                   <li className="d-flex justify-content-between mb-4">
                     <div className="chat-body white p-3 z-depth-1">
                       <div className="header">
-                        <strong className="primary-font">Lara Croft</strong>
+                        <strong className="primary-font">Dustin Irving</strong>
                         <small className="pull-right text-muted"><i className="far fa-clock"></i> 13 mins ago</small>
                       </div>
                       <hr className="w-100"/>
@@ -150,13 +152,13 @@ function Home () {
                         laudantium.
                       </p>
                     </div>
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                    <img style={styles.avatar} src="https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                   </li>
                   <li className="d-flex justify-content-between mb-4">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                    <img style={styles.avatar} src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                     <div className="chat-body white p-3 ml-2 z-depth-1">
                       <div className="header">
-                        <strong className="primary-font">Brad Pitt</strong>
+                        <strong className="primary-font">Diego Lehyt</strong>
                         <small className="pull-right text-muted"><i className="far fa-clock"></i> 12 mins ago</small>
                       </div>
                       <hr className="w-100"/>
@@ -169,7 +171,7 @@ function Home () {
                   <li className="d-flex justify-content-between mb-4">
                     <div className="chat-body white p-3 z-depth-1">
                       <div className="header">
-                        <strong className="primary-font">Lara Croft</strong>
+                        <strong className="primary-font">Dustin Irving</strong>
                         <small className="pull-right text-muted"><i className="far fa-clock"></i> 13 mins ago</small>
                       </div>
                       <hr className="w-100"/>
@@ -178,13 +180,13 @@ function Home () {
                         laudantium.
                       </p>
                     </div>
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                    <img style={styles.avatar} src="https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                   </li>
                   <li className="d-flex justify-content-between mb-4 pb-3">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                    <img style={styles.avatar} src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                     <div className="chat-body white p-3 ml-2 z-depth-1">
                       <div className="header">
-                        <strong className="primary-font">Brad Pitt</strong>
+                        <strong className="primary-font">Diego Lehyt</strong>
                         <small className="pull-right text-muted"><i className="far fa-clock"></i> 12 mins ago</small>
                       </div>
                       <hr className="w-100"/>
