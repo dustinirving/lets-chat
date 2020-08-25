@@ -14,7 +14,7 @@ function Home () {
 
   return (
     <>
-      <div className="card dusty-grass-gradient chat-room">
+      <div className="card dusty-grass-gradient chat-room animated fadeInRight">
         <div className="card-body">
 
 
@@ -22,7 +22,7 @@ function Home () {
 
             <div className="col-md-6 col-xl-4 px-0">
 
-              <h6 className="font-weight-bold mb-3 text-center text-lg-left">Member</h6>
+              <h6 className="font-weight-bold mb-3 text-center text-lg-left"><i className="fas fa-user-alt light-green-text-2"></i>{" "}Diego Lehyt</h6>
               <div className="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
                 <ul className="list-unstyled friend-list">
                   <li className="p-2">

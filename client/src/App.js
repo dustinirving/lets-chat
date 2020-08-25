@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Navbar from "./components/Navbar";
 
 
 // import Wrapper from './components/Wrapper'
@@ -18,7 +19,7 @@ const styles = {
 function App () {
   return (
     <Router style={styles.headerB}>
-
+      <Navbar />
       <Route exact path='/' component={Login} />
       <Route exact path='/home' component={Home} />
 
