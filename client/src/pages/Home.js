@@ -25,6 +25,32 @@ function Home () {
               <h6 className="font-weight-bold mb-3 text-center text-lg-left">Member</h6>
               <div className="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
                 <ul className="list-unstyled friend-list">
+                  <li className="p-2">
+                    <a href="#" className="d-flex justify-content-between">
+                      <img style={styles.avatar} src="https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <div className="text-small">
+                        <strong>Dustin Irving</strong>
+                        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                      <div className="chat-footer">
+                        <p className="text-smaller text-muted mb-0">Yesterday</p>
+                        <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
+                      </div>
+                    </a>
+                  </li>
+                  <li className="p-2">
+                    <a href="#" className="d-flex justify-content-between">
+                      <img style={styles.avatar} src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+                      <div className="text-small">
+                        <strong>Diego Lehyt</strong>
+                        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
+                      </div>
+                      <div className="chat-footer">
+                        <p className="text-smaller text-muted mb-0">5 min ago</p>
+                        <span className="text-muted float-right"><i className="fas fa-check" aria-hidden="true"></i></span>
+                      </div>
+                    </a>
+                  </li>
                   <li className="active grey lighten-3 p-2">
                     <a href="#" className="d-flex justify-content-between">
                       <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
@@ -90,32 +116,7 @@ function Home () {
                       </div>
                     </a>
                   </li>
-                  <li className="p-2">
-                    <a href="#" className="d-flex justify-content-between">
-                      <img style={styles.avatar} src="https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-                      <div className="text-small">
-                        <strong>Dustin Irving</strong>
-                        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
-                      </div>
-                      <div className="chat-footer">
-                        <p className="text-smaller text-muted mb-0">Yesterday</p>
-                        <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
-                      </div>
-                    </a>
-                  </li>
-                  <li className="p-2">
-                    <a href="#" className="d-flex justify-content-between">
-                      <img style={styles.avatar} src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-                      <div className="text-small">
-                        <strong>Diego Lehyt</strong>
-                        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
-                      </div>
-                      <div className="chat-footer">
-                        <p className="text-smaller text-muted mb-0">5 min ago</p>
-                        <span className="text-muted float-right"><i className="fas fa-check" aria-hidden="true"></i></span>
-                      </div>
-                    </a>
-                  </li>
+
                 </ul>
               </div>
 
