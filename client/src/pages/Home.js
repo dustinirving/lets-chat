@@ -14,7 +14,7 @@ function Home () {
 
   return (
     <>
-      <div className="card rare-wind-gradient chat-room">
+      <div className="card dusty-grass-gradient chat-room">
         <div className="card-body">
 
 
@@ -203,7 +203,7 @@ function Home () {
                     <textarea className="form-control pl-2 my-0" id="exampleFormControlTextarea2" rows="3" placeholder="Type your message here..."></textarea>
                   </div>
                 </div>
-                <button type="button" className="btn btn-outline-pink btn-rounded btn-sm waves-effect waves-dark float-right">Send</button>
+                <button type="button" className="btn btn-outline-green btn-rounded btn-sm waves-effect waves-dark float-right">Send</button>
 
               </div>
 
