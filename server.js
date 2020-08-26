@@ -1,3 +1,5 @@
+require('dotenv').config()
+const http = require('http')
 const { ApolloServer } = require("apollo-server-express")
 const mongoose = require('mongoose')
 const typeDefs = require('./typeDefs')
@@ -8,10 +10,9 @@ const { User } = require('./models')
 const { verify } = require("jsonwebtoken")
 const createTokens = require('./auth/createTokens')
 const PORT = 4000 || process.env.PORT
-// const { PubSub } = require('apollo-server')
-// const pubsub = new PubSub()
-require('dotenv').config()
-
+const { PubSub } = require('apollo-server')
+const pubsub = new PubSub()
+const NEW_MESSAGE = 'NEW_MESSAGE'
 
 const app = express()
 
@@ -63,11 +64,15 @@ app.use(async (req, res, next) => {
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res, pubsub })
 })
 
 server.applyMiddleware({ app })
 
-app.listen(PORT, () => {
-    console.log('Server listening on PORT: ', PORT)
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
+
+httpServer.listen(PORT, () => {
+    console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`)
+    console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)
 })
