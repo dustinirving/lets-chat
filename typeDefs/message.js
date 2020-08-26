@@ -9,6 +9,10 @@ const message = gql`
     postMessage(user: String!, content: String!): Message!
   }
 
+  extend type Subscription {
+    newMessage: Message!
+  }
+
   type Message {
     _id: ID!
     user: String!

@@ -8,6 +8,8 @@ const { User } = require('./models')
 const { verify } = require("jsonwebtoken")
 const createTokens = require('./auth/createTokens')
 const PORT = 4000 || process.env.PORT
+// const { PubSub } = require('apollo-server')
+// const pubsub = new PubSub()
 require('dotenv').config()
 
 
