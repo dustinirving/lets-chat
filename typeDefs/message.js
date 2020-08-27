@@ -6,17 +6,18 @@ const message = gql`
   }
 
   extend type Mutation {
-    postMessage(user: String!, content: String!): Message!
+    postMessage(userId: ID!, conversationId: ID!, content: String!): Message!
   }
 
   extend type Subscription {
-    newMessage: Message!
+    newMessage: [Message!]!
   }
 
   type Message {
     _id: ID!
-    user: String!
-    content: String!
+    user: User!
+    content: String
+    conversation: Conversation!
   }
 `
 
