@@ -1,6 +1,6 @@
 require('dotenv').config()
 const http = require('http')
-const { ApolloServer } = require("apollo-server-express")
+const { ApolloServer, PubSub } = require("apollo-server-express")
 const mongoose = require('mongoose')
 const typeDefs = require('./typeDefs')
 const resolvers = require('./resolvers')
@@ -10,9 +10,7 @@ const { User } = require('./models')
 const { verify } = require("jsonwebtoken")
 const createTokens = require('./auth/createTokens')
 const PORT = 4000 || process.env.PORT
-const { PubSub } = require('apollo-server')
 const pubsub = new PubSub()
-const NEW_MESSAGE = 'NEW_MESSAGE'
 
 const app = express()
 
