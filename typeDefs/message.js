@@ -10,7 +10,7 @@ const message = gql`
   }
 
   extend type Subscription {
-    newMessage: [Message!]!
+    conversation: Conversation
   }
 
   type Message {
