@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import Navbar from '../components/Navbar'
+import Conversation from '../components/Conversation'
 import { useHistory, Redirect } from 'react-router-dom'
 
 const styles = {
@@ -25,7 +25,8 @@ function Home () {
               <h6 className="font-weight-bold mb-3 text-center text-lg-left"><i className="fas fa-user-alt light-green-text-2"></i>{" "}Diego Lehyt</h6>
               <div className="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
                 <ul className="list-unstyled friend-list">
-                  <li className="p-2">
+                  <Conversation></Conversation>
+                  {/* <li className="p-2">
                     <a href="#" className="d-flex justify-content-between">
                       <img style={styles.avatar} src="https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
                       <div className="text-small">
@@ -115,7 +116,7 @@ function Home () {
                         <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
                       </div>
                     </a>
-                  </li>
+                  </li> */}
 
                 </ul>
               </div>
