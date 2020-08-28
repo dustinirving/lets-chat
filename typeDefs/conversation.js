@@ -16,8 +16,7 @@ const conversation = gql`
 
   type Conversation {
     _id: ID!
-    creator: User!
-    recipient: User!
+    users: [User!]!
     messages: [Message!]
   }
 `
