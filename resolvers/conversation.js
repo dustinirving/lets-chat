@@ -5,7 +5,7 @@ const NEW_CONVERSATION = 'NEW_CONVERSATION'
 module.exports = {
   Query: {
     conversations: async (_, { userId }) =>
-      await Conversation.find({ creator: userId }).populate('messages'),
+      await Conversation.find({ users: userId }).populate('messages'),
     conversation: async (_, { conversationId }) =>
       await Conversation.findById(conversationId).populate('messages')
   },
