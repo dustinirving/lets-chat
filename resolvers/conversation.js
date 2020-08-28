@@ -1,4 +1,6 @@
 const { Conversation, User } = require('../models')
+const { withFilter } = require('apollo-server-express')
+const NEW_CONVERSATION = 'NEW_CONVERSATION'
 
 module.exports = {
   Query: {
@@ -8,11 +10,11 @@ module.exports = {
       await Conversation.findById(conversationId).populate('messages')
   },
   Mutation: {
-    newConversation: async (_, { creatorId, recipientId }) => {
+    createConversation: async (_, { creatorId, recipientId }, { pubsub }) => {
       const conversation = await Conversation.create({
-        creator: creatorId,
-        recipient: recipientId
+        users: [creatorId, recipientId]
       })
+
       await User.findOneAndUpdate(
         {
           _id: creatorId
@@ -22,7 +24,35 @@ module.exports = {
           new: true
         }
       )
+
+      await User.findOneAndUpdate(
+        {
+          _id: recipientId
+        },
+        { $push: { conversations: conversation._id } },
+        {
+          new: true
+        }
+      )
+
+      pubsub.publish(NEW_CONVERSATION, {
+        newConversation: conversation,
+        recipientId
+      })
+
       return conversation
+    }
+  },
+  Subscription: {
+    newConversation: {
+      subscribe: withFilter(
+        (_, __, { pubsub }) => pubsub.asyncIterator(NEW_CONVERSATION),
+        (payload, args) => {
+          console.log(args.userId)
+          console.log(payload.recipientId)
+          return payload.recipientId === args.userId
+        }
+      )
     }
   }
 }

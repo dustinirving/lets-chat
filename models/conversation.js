@@ -4,14 +4,12 @@ const Schema = mongoose.Schema
 
 const ConversationSchema = new Schema(
   {
-    creator: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    recipient: {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    },
+    users: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
     messages: [
       {
         type: Schema.Types.ObjectId,

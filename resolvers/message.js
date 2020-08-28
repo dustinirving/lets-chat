@@ -1,14 +1,17 @@
 const { Message, Conversation } = require('../models')
-const conversation = require('./conversation')
-
-const CONVERSATION = 'CONVERSATION'
+const { withFilter } = require('apollo-server-express')
+const NEW_MESSAGE = 'NEW_MESSAGE'
 
 module.exports = {
   Query: {
     messages: async () => await Message.find()
   },
   Mutation: {
-    postMessage: async (_, { userId, conversationId, content }, { pubsub }) => {
+    createMessage: async (
+      _,
+      { userId, conversationId, content },
+      { pubsub }
+    ) => {
       const message = await Message.create({
         user: userId,
         conversation: conversationId,
@@ -25,19 +28,27 @@ module.exports = {
         }
       )
 
-      const conversation = await Conversation.findById(conversationId).populate(
-        'messages'
-      )
-
-      console.log(conversation)
-      pubsub.publish(CONVERSATION, { conversation })
+      pubsub.publish(NEW_MESSAGE, { newMessage: message, conversationId })
 
       return message
     }
   },
   Subscription: {
-    conversation: {
-      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator(CONVERSATION)
+    newMessage: {
+      subscribe: withFilter(
+        (_, __, { pubsub }) => pubsub.asyncIterator(NEW_MESSAGE),
+        (payload, args) => {
+          console.log(payload.conversationId)
+          console.log(args.conversationId)
+          return payload.conversationId === args.conversationId
+        }
+      )
     }
   }
 }
+
+// Subscription: {
+//   conversation: {
+//     subscribe: (_, __, { pubsub }) => pubsub.asyncIterator(NEW_MESSAGE), (pa)
+//   }
+// }
