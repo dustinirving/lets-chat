@@ -1,7 +1,7 @@
 const { Message, Conversation } = require('../models')
 const conversation = require('./conversation')
 
-const NEW_MESSAGE = 'NEW_MESSAGE'
+const CONVERSATION = 'CONVERSATION'
 
 module.exports = {
   Query: {
@@ -14,7 +14,7 @@ module.exports = {
         conversation: conversationId,
         content
       })
-      pubsub.publish(NEW_MESSAGE, { newMessage: message.content })
+
       await Conversation.findOneAndUpdate(
         {
           _id: conversationId
@@ -24,12 +24,20 @@ module.exports = {
           new: true
         }
       )
+
+      const conversation = await Conversation.findById(conversationId).populate(
+        'messages'
+      )
+
+      console.log(conversation)
+      pubsub.publish(CONVERSATION, { conversation })
+
       return message
     }
   },
   Subscription: {
-    newMessage: {
-      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator(NEW_MESSAGE)
+    conversation: {
+      subscribe: (_, __, { pubsub }) => pubsub.asyncIterator(CONVERSATION)
     }
   }
 }
