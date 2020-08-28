@@ -4,9 +4,7 @@ import "./style.css";
 
 const styles = {
   navB: {
-    fontFamily: "'Londrina Solid', cursive",
-    fontWeight: 'bold'
-
+    fontFamily: "'Londrina Solid', cursive"
   },
   imgB: {
     marginRight: "10px"
