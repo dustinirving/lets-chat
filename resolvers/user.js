@@ -32,6 +32,10 @@ module.exports = {
         throw Error('Username already exists')
       }
       const user = await User.create({ email, password })
+      const tokens = createTokens(user)
+      res.cookie('access-token', tokens.accessToken, { maxAge: 1000 })
+      res.cookie('refresh-token', tokens.refreshToken, { maxAge: 10000 })
+
       return user
     },
     login: async (_, { email, password }, { res }) => {
