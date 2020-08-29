@@ -19,9 +19,11 @@ const CONVERSATIONS = gql`
 `
 const CREATE_CONVERSATION = gql`
   mutation createConversation($creatorId: String!, $recipientId: String!) {
-    createConversation(creatorId: $creatorId, recipientId: $recipientId){
+    createConversation(creatorId: $creatorId, recipientId: $recipientId) {
       _id
-      users{_id}
+      users {
+        _id
+      }
     }
   }
 `
@@ -60,12 +62,10 @@ const messages = [
   }
 ]
 
-function Home() {
+function Home () {
   // const { loading, error, data } = useQuery(CONVERSATIONS)
 
-  const [createConversation, { data }] = useMutation(
-    CREATE_CONVERSATION
-  )
+  const [createConversation, { data }] = useMutation(CREATE_CONVERSATION)
   useEffect(() => {
     createConversation({
       variables: {
