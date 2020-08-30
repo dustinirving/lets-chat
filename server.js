@@ -52,8 +52,10 @@ app.use(async (req, res, next) => {
 
   const tokens = createTokens(user)
 
-  res.cookie('access-token', tokens.accessToken, { maxAge: 5000 })
-  res.cookie('refresh-token', tokens.refreshToken, { maxAge: 20000 })
+  res.cookie('access-token', tokens.accessToken, { maxAge: 1000 * 60 * 30 })
+  res.cookie('refresh-token', tokens.refreshToken, {
+    maxAge: 1000 * 60 * 60 * 24
+  })
   req.user = { userId: data.userId, email: data.email }
 
   next()

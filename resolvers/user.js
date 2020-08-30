@@ -33,8 +33,10 @@ module.exports = {
       const user = await User.create({ email, password })
       const tokens = createTokens(user)
 
-      res.cookie('access-token', tokens.accessToken, { maxAge: 5000 })
-      res.cookie('refresh-token', tokens.refreshToken, { maxAge: 20000 })
+      res.cookie('access-token', tokens.accessToken, { maxAge: 1000 * 60 * 30 })
+      res.cookie('refresh-token', tokens.refreshToken, {
+        maxAge: 1000 * 60 * 60 * 24
+      })
 
       return user
     },
@@ -46,8 +48,10 @@ module.exports = {
 
       const tokens = createTokens(user)
 
-      res.cookie('access-token', tokens.accessToken, { maxAge: 5000 })
-      res.cookie('refresh-token', tokens.refreshToken, { maxAge: 20000 })
+      res.cookie('access-token', tokens.accessToken, { maxAge: 1000 * 60 * 30 })
+      res.cookie('refresh-token', tokens.refreshToken, {
+        maxAge: 1000 * 60 * 60 * 24
+      })
 
       return user
     }
