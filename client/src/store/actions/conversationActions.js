@@ -22,20 +22,20 @@ export const getConversation = ({ conversationId }) => dispatch => {
       console.log(err)
     })
 }
-export const getConversations = ({ userId }) => dispatch => {
-  request('/', getConversationsQuery, { userId })
+export const getConversations = () => dispatch => {
+  request('/', getConversationsQuery)
     .then(data => {
       dispatch({
         type: GET_CONVERSATIONS,
-        payload: data
+        payload: data.conversations
       })
     })
     .catch(err => {
       console.log(err)
     })
 }
-export const createConversation = ({ creatorId, recipientId }) => dispatch => {
-  request('/', createConversationMutation, { creatorId, recipientId })
+export const createConversation = ({ recipientId }) => dispatch => {
+  request('/', createConversationMutation, { recipientId })
     .then(data => {
       dispatch({
         type: CREATE_CONVERSATION,
