@@ -48,7 +48,7 @@ export const login = ({ email, password }) => dispatch => {
     .then(data => {
       dispatch({
         type: LOGIN,
-        payload: data
+        payload: data.login
       })
     })
     .catch(err => {

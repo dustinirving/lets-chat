@@ -32,8 +32,8 @@ export const loginUserMutation = gql`
 `
 
 export const getConversationsQuery = gql`
-  query conversations($userId: String!) {
-    conversations(userId: $userId) {
+  query conversations {
+    conversations {
       _id
     }
   }
@@ -46,12 +46,9 @@ export const getConversationQuery = gql`
   }
 `
 export const createConversationMutation = gql`
-  mutation createConversation($creatorId: String!, $recipientId: String!) {
-    createConversation(creatorId: $creatorId, recipientId: $recipientId) {
+  mutation createConversation($recipientId: String!) {
+    createConversation(recipientId: $recipientId) {
       _id
-      users {
-        _id
-      }
     }
   }
 `

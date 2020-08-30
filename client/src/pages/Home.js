@@ -3,6 +3,8 @@ import Conversation from '../components/Conversation'
 import Message from '../components/Message'
 import DropDown from '../components/DropDown'
 import { useHistory, Redirect } from 'react-router-dom'
+import { getConversations } from '../store/actions/conversationActions'
+import { connect } from 'react-redux'
 
 const styles = {
   avatar: {
@@ -44,7 +46,11 @@ const messages = [
   }
 ]
 
-function Home() {
+function Home ({ getConversations }) {
+  useEffect(() => {
+    getConversations()
+  }, [])
+
   return (
     <>
       <div className='card dusty-grass-gradient chat-room animated fadeInRight'>
@@ -111,7 +117,13 @@ function Home() {
   )
 }
 
-export default Home
+const mapStateToProps = state => {
+  return {
+    conversations: state.conversations.conversations
+  }
+}
+
+export default connect(mapStateToProps, { getConversations })(Home)
 
 // <li className="p-2">
 //     <a href="#" className="d-flex justify-content-between">

@@ -4,20 +4,23 @@ const NEW_CONVERSATION = 'NEW_CONVERSATION'
 
 module.exports = {
   Query: {
-    conversations: async (_, { userId }) =>
-      await Conversation.find({ users: userId }).populate('messages'),
+    conversations: async (_, __, { req }) => {
+      return await Conversation.find({ users: req.user.userId }).populate(
+        'messages'
+      )
+    },
     conversation: async (_, { conversationId }) =>
       await Conversation.findById(conversationId).populate('messages')
   },
   Mutation: {
-    createConversation: async (_, { creatorId, recipientId }, { pubsub }) => {
+    createConversation: async (_, { recipientId }, { req, pubsub }) => {
       const conversation = await Conversation.create({
-        users: [creatorId, recipientId]
+        users: [req.user.userId, recipientId]
       })
 
       await User.findOneAndUpdate(
         {
-          _id: creatorId
+          _id: req.user.userId
         },
         { $push: { conversations: conversation._id } },
         {
@@ -48,8 +51,6 @@ module.exports = {
       subscribe: withFilter(
         (_, __, { pubsub }) => pubsub.asyncIterator(NEW_CONVERSATION),
         (payload, args) => {
-          console.log(args.userId)
-          console.log(payload.recipientId)
           return payload.recipientId === args.userId
         }
       )

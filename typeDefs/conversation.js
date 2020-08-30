@@ -2,12 +2,12 @@ const { gql } = require('apollo-server-express')
 
 const conversation = gql`
   extend type Query {
-    conversations(userId: ID!): [Conversation!]
+    conversations: [Conversation!]
     conversation(conversationId: ID!): Conversation
   }
 
   extend type Mutation {
-    createConversation(creatorId: String!, recipientId: String!): Conversation!
+    createConversation(recipientId: ID!): Conversation!
   }
 
   extend type Subscription {
