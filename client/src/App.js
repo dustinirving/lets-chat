@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Navbar from './components/Navbar'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import { ProtectedRoute } from './utils/ProtectedRoute'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
@@ -27,7 +28,7 @@ function App () {
       <Router style={styles.headerB}>
         <Navbar />
         <Route exact path='/' component={Login} />
-        <Route exact path='/home' component={Home} />
+        <ProtectedRoute exact path='/home' component={Home} />
       </Router>
     </ApolloProvider>
   )

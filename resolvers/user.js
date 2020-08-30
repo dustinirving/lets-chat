@@ -26,7 +26,7 @@ module.exports = {
     }
   },
   Mutation: {
-    createUser: async (_, { email, password }) => {
+    createUser: async (_, { email, password }, { res }) => {
       const emailExists = await User.findOne({ email: email })
       if (emailExists) {
         throw Error('Username already exists')

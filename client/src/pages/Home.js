@@ -11,22 +11,6 @@ const styles = {
   }
 }
 
-// const CONVERSATIONS = gql`
-//   query conversations {
-//     conversations(userId: "5f491cf149505d012c2f35d3") {
-//       _id
-//     }
-//   }
-// `
-// const CREATE_CONVERSATION = gql`
-//   mutation createConversation($creatorId: String!, $recipientId: String!) {
-//     createConversation(creatorId: $creatorId, recipientId: $recipientId){
-//       _id
-//       users{_id}
-//     }
-//   }
-// `
-
 // const USERS = gql`
 //   query users {
 //     users() {
@@ -34,6 +18,24 @@ const styles = {
 //     }
 //   }
 // `
+
+const CONVERSATIONS = gql`
+  query conversations {
+    conversations(userId: "5f49225531c7e3538743b4e7") {
+      _id
+    }
+  }
+`
+const CREATE_CONVERSATION = gql`
+  mutation createConversation($creatorId: String!, $recipientId: String!) {
+    createConversation(creatorId: $creatorId, recipientId: $recipientId) {
+      _id
+      users {
+        _id
+      }
+    }
+  }
+`
 
 // simulate conversation with messages
 const messages = [
@@ -94,6 +96,20 @@ function Home() {
   // useEffect(() => {
   //   setUsers(data)
   // }, [])
+
+function Home () {
+  // const { loading, error, data } = useQuery(CONVERSATIONS)
+
+  const [createConversation, { data }] = useMutation(CREATE_CONVERSATION)
+  useEffect(() => {
+    createConversation({
+      variables: {
+        creatorId: '5f49225531c7e3538743b4e7',
+        recipientId: '5f49228a31c7e3538743b4e8'
+      }
+    })
+  }, [])
+
 
   return (
     <>
