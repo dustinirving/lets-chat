@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { createUser } from '../store/actions/userActions'
 
 const styles = {
   forma: {
@@ -11,44 +14,26 @@ const styles = {
   }
 }
 
-const Login = () => {
-  const [passwordP, setPasswordP] = useState('')
-  const [emailP, setEmailP] = useState('')
-  const [userP, setUserP] = useState('')
+const Register = ({ createUser, user }) => {
+  const [form, setForm] = useState({ email: '', password: '' })
 
-  const handlePasswordChange = e => {
-    // e.preventDefault();
-    setPasswordP(e.target.value)
-    console.log(passwordP)
-  }
-
-  const handleEmailChange = e => {
-    // e.preventDefault();
-    setEmailP(e.target.value)
-    console.log(emailP)
-  }
-
-  const handleUser = e => {
-    // e.preventDefault();
-    setUserP(e.target.value)
-    console.log(userP)
+  const handleChange = e => {
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-
-    handleEmailChange(e)
-    handlePasswordChange(e)
-
-    handleUser()
+    createUser(form)
   }
   return (
     <div className='container' style={styles.conta}>
+      {user ? <Redirect to='/home' /> : null}
       <div className='row'>
         <div className='col-12 d-flex justify-content-center animated fadeInRight'>
           <div className='card cloudy-knoxville-gradient' style={styles.forma}>
             <h5 className='card-header success-color white-text text-center py-4'>
-              <strong>Login</strong>
+              <strong>Register</strong>
             </h5>
 
             <div className='card-body px-lg-5 pt-0'>
@@ -56,8 +41,8 @@ const Login = () => {
                 <div className='md-form'>
                   <input
                     type='email'
-                    onChange={handleEmailChange}
-                    value={emailP}
+                    onChange={handleChange}
+                    value={form.email}
                     id='email'
                     name='email'
                     className='form-control'
@@ -68,8 +53,8 @@ const Login = () => {
                 <div className='md-form'>
                   <input
                     type='password'
-                    onChange={handlePasswordChange}
-                    value={passwordP}
+                    onChange={handleChange}
+                    value={form.password}
                     id='password'
                     name='password'
                     className='form-control'
@@ -102,12 +87,12 @@ const Login = () => {
                   className='btn btn-outline-success btn-rounded btn-block my-4 waves-effect z-depth-0'
                   type='submit'
                 >
-                  Sign in
+                  Register
                 </button>
 
                 <p>
-                  Not a member?
-                  <a href='/register'>Register</a>
+                  Already a member?
+                  <a href='/'>Login</a>
                 </p>
 
                 <p>or sign in with:</p>
@@ -132,4 +117,10 @@ const Login = () => {
   )
 }
 
-export default Login
+const mapStateToProps = state => {
+  return {
+    user: state.users.user
+  }
+}
+
+export default connect(mapStateToProps, { createUser })(Register)

@@ -71,49 +71,9 @@ const messages = [
   }
 ]
 
-function Home() {
-
-  // const [users, setUsers] = useState([])
-  // const { loading, error, data } = useQuery(USERS)
-  // const { loading, error, data } = useQuery(CONVERSATIONS)
-
-  // const [createConversation, { data }] = useMutation(
-  //   CREATE_CONVERSATION
-  // )
-  // useEffect(() => {
-  //   createConversation({
-  //     variables: {
-  //       creatorId: '5f491cf149505d012c2f35d3',
-  //       recipientId: '5f4a7ef352c7d64198d452cb'
-  //     }
-  //   })
-  // }, [])
-
-  // const [createConversation, { data }] = useMutation(
-  //   CREATE_CONVERSATION
-  // )
-
-  // useEffect(() => {
-  //   setUsers(data)
-  // }, [])
-
 function Home () {
-  // const { loading, error, data } = useQuery(CONVERSATIONS)
-
-  const [createConversation, { data }] = useMutation(CREATE_CONVERSATION)
-  useEffect(() => {
-    createConversation({
-      variables: {
-        creatorId: '5f49225531c7e3538743b4e7',
-        recipientId: '5f49228a31c7e3538743b4e8'
-      }
-    })
-  }, [])
-
-
   return (
     <>
-      {/* {console.log(data)} */}
       <div className='card dusty-grass-gradient chat-room animated fadeInRight'>
         <div className='card-body'>
           <div className='row px-lg-2 px-2'>
@@ -122,11 +82,17 @@ function Home () {
                 <i className='fas fa-user-alt light-green-text-2'></i> Diego
                 Lehyt
               </h6>
-              <button className="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Users</button>
+              <button
+                className='btn btn-primary dropdown-toggle mr-4'
+                type='button'
+                data-toggle='dropdown'
+                aria-haspopup='true'
+                aria-expanded='false'
+              >
+                Users
+              </button>
 
-
-              <div className="dropdown-menu">
+              <div className='dropdown-menu'>
                 {messages.map(msg => (
                   <DropDown />
                 ))}
@@ -174,96 +140,94 @@ function Home () {
 
 export default Home
 
-{
-  /* <li className="p-2">
-    <a href="#" className="d-flex justify-content-between">
-      <img style={styles.avatar} src="https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-      <div className="text-small">
-        <strong>Dustin Irving</strong>
-        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
-      </div>
-      <div className="chat-footer">
-        <p className="text-smaller text-muted mb-0">Yesterday</p>
-        <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
-      </div>
-    </a>
-  </li>
-  <li className="p-2">
-    <a href="#" className="d-flex justify-content-between">
-      <img style={styles.avatar} src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-      <div className="text-small">
-        <strong>Diego Lehyt</strong>
-        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
-      </div>
-      <div className="chat-footer">
-        <p className="text-smaller text-muted mb-0">5 min ago</p>
-        <span className="text-muted float-right"><i className="fas fa-check" aria-hidden="true"></i></span>
-      </div>
-    </a>
-  </li>
-  <li className="active grey lighten-3 p-2">
-    <a href="#" className="d-flex justify-content-between">
-      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-      <div className="text-small">
-        <strong>John Doe</strong>
-        <p className="last-message text-muted">Hello, Are you there?</p>
-      </div>
-      <div className="chat-footer">
-        <p className="text-smaller text-muted mb-0">Just now</p>
-        <span className="badge badge-danger float-right">1</span>
-      </div>
-    </a>
-  </li>
-  <li className="p-2">
-    <a href="#" className="d-flex justify-content-between">
-      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-      <div className="text-small">
-        <strong>Danny Smith</strong>
-        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
-      </div>
-      <div className="chat-footer">
-        <p className="text-smaller text-muted mb-0">5 min ago</p>
-        <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
-      </div>
-    </a>
-  </li>
-  <li className="p-2">
-    <a href="#" className="d-flex justify-content-between">
-      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-      <div className="text-small">
-        <strong>Alex Steward</strong>
-        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
-      </div>
-      <div className="chat-footer">
-        <p className="text-smaller text-muted mb-0">Yesterday</p>
-        <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
-      </div>
-    </a>
-  </li>
-  <li className="p-2">
-    <a href="#" className="d-flex justify-content-between">
-      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-3.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-      <div className="text-small">
-        <strong>Ashley Olsen</strong>
-        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
-      </div>
-      <div className="chat-footer">
-        <p className="text-smaller text-muted mb-0">Yesterday</p>
-        <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
-      </div>
-    </a>
-  </li>
-  <li className="p-2">
-    <a href="#" className="d-flex justify-content-between">
-      <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-4.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
-      <div className="text-small">
-        <strong>Kate Moss</strong>
-        <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
-      </div>
-      <div className="chat-footer">
-        <p className="text-smaller text-muted mb-0">Yesterday</p>
-        <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
-      </div>
-    </a>
-  </li> */
-}
+// <li className="p-2">
+//     <a href="#" className="d-flex justify-content-between">
+//       <img style={styles.avatar} src="https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+//       <div className="text-small">
+//         <strong>Dustin Irving</strong>
+//         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
+//       </div>
+//       <div className="chat-footer">
+//         <p className="text-smaller text-muted mb-0">Yesterday</p>
+//         <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
+//       </div>
+//     </a>
+//   </li>
+//   <li className="p-2">
+//     <a href="#" className="d-flex justify-content-between">
+//       <img style={styles.avatar} src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+//       <div className="text-small">
+//         <strong>Diego Lehyt</strong>
+//         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
+//       </div>
+//       <div className="chat-footer">
+//         <p className="text-smaller text-muted mb-0">5 min ago</p>
+//         <span className="text-muted float-right"><i className="fas fa-check" aria-hidden="true"></i></span>
+//       </div>
+//     </a>
+//   </li>
+//   <li className="active grey lighten-3 p-2">
+//     <a href="#" className="d-flex justify-content-between">
+//       <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-8.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+//       <div className="text-small">
+//         <strong>John Doe</strong>
+//         <p className="last-message text-muted">Hello, Are you there?</p>
+//       </div>
+//       <div className="chat-footer">
+//         <p className="text-smaller text-muted mb-0">Just now</p>
+//         <span className="badge badge-danger float-right">1</span>
+//       </div>
+//     </a>
+//   </li>
+//   <li className="p-2">
+//     <a href="#" className="d-flex justify-content-between">
+//       <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+//       <div className="text-small">
+//         <strong>Danny Smith</strong>
+//         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
+//       </div>
+//       <div className="chat-footer">
+//         <p className="text-smaller text-muted mb-0">5 min ago</p>
+//         <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
+//       </div>
+//     </a>
+//   </li>
+//   <li className="p-2">
+//     <a href="#" className="d-flex justify-content-between">
+//       <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+//       <div className="text-small">
+//         <strong>Alex Steward</strong>
+//         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
+//       </div>
+//       <div className="chat-footer">
+//         <p className="text-smaller text-muted mb-0">Yesterday</p>
+//         <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
+//       </div>
+//     </a>
+//   </li>
+//   <li className="p-2">
+//     <a href="#" className="d-flex justify-content-between">
+//       <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-3.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+//       <div className="text-small">
+//         <strong>Ashley Olsen</strong>
+//         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
+//       </div>
+//       <div className="chat-footer">
+//         <p className="text-smaller text-muted mb-0">Yesterday</p>
+//         <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
+//       </div>
+//     </a>
+//   </li>
+//   <li className="p-2">
+//     <a href="#" className="d-flex justify-content-between">
+//       <img style={styles.avatar} src="https://mdbootstrap.com/img/Photos/Avatars/avatar-4.jpg" alt="avatar" className="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1"/>
+//       <div className="text-small">
+//         <strong>Kate Moss</strong>
+//         <p className="last-message text-muted">Lorem ipsum dolor sit.</p>
+//       </div>
+//       <div className="chat-footer">
+//         <p className="text-smaller text-muted mb-0">Yesterday</p>
+//         <span className="text-muted float-right"><i className="fas fa-mail-reply" aria-hidden="true"></i></span>
+//       </div>
+//     </a>
+// </li>

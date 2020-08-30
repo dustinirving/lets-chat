@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Navbar from './components/Navbar'
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
-import { ProtectedRoute } from './utils/ProtectedRoute'
-
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  cache: new InMemoryCache()
-})
+import Register from './pages/Register'
+import ProtectedRoute from './utils/ProtectedRoute'
 
 // import Wrapper from './components/Wrapper'
 
@@ -24,13 +19,12 @@ const styles = {
 
 function App () {
   return (
-    <ApolloProvider client={client}>
-      <Router style={styles.headerB}>
-        <Navbar />
-        <Route exact path='/' component={Login} />
-        <ProtectedRoute exact path='/home' component={Home} />
-      </Router>
-    </ApolloProvider>
+    <Router style={styles.headerB}>
+      <Navbar />
+      <Route exact path='/' component={Login} />
+      <Route exact path='/register' component={Register} />
+      <ProtectedRoute exact path='/home' component={Home} />
+    </Router>
   )
 }
 

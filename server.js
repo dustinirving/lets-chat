@@ -2,6 +2,7 @@ require('dotenv').config()
 const http = require('http')
 const { ApolloServer, PubSub } = require('apollo-server-express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const typeDefs = require('./typeDefs')
 const resolvers = require('./resolvers')
 const express = require('express')
@@ -51,8 +52,8 @@ app.use(async (req, res, next) => {
 
   const tokens = createTokens(user)
 
-  res.cookie('access-token', tokens.accessToken, { maxAge: 1000 })
-  res.cookie('refresh-token', tokens.refreshToken, { maxAge: 10000 })
+  res.cookie('access-token', tokens.accessToken, { maxAge: 5000 })
+  res.cookie('refresh-token', tokens.refreshToken, { maxAge: 20000 })
   req.user = { userId: data.userId, email: data.email }
 
   next()
