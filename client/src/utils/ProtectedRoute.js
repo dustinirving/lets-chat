@@ -1,40 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { gql, useQuery } from '@apollo/client'
+import { connect } from 'react-redux'
+import { getUser } from '../store/actions/userActions'
 
-
-export const ProtectedRoute = props => {
+const ProtectedRoute = props => {
   const { component: __, ...rest } = props
+  const { component, user, waitingForData, getUser } = props
+  const Component = component
 
-  const USER_QUERY = gql`
-  query user {
-    user {
-      _id
-    }
-  }
-`
-  const { loading, data } = useQuery(USER_QUERY)
-
-  console.log(`😛`)
-  console.log(data)
-  console.log(`😛`)
-
+  useEffect(() => {
+    getUser()
+  }, [])
 
   const renderRoute = routeProps => {
-    const { component } = props
-
-    if (loading) {
+    if (waitingForData) {
       // loading screen
-      return <div>loading...</div>
+      return <div>loading..</div>
     }
 
-    if (!data) {
+    if (!user) {
       // user not logged in
       return <Redirect to='/' />
     }
-    const Component = component 
+
     return <Component {...routeProps} />
   }
 
   return <Route {...rest} render={renderRoute} />
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.users.user,
+    waitingForData: state.users.waitingForData
+  }
+}
+
+export default connect(mapStateToProps, { getUser })(ProtectedRoute)

@@ -15,7 +15,6 @@ module.exports = {
     },
     user: async (_, __, { req }) => {
       if (!req.user) return null
-      console.log(req.user.userId)
       return await User.findById(req.user.userId).populate({
         path: 'conversations',
         populate: {
@@ -33,8 +32,9 @@ module.exports = {
       }
       const user = await User.create({ email, password })
       const tokens = createTokens(user)
-      res.cookie('access-token', tokens.accessToken, { maxAge: 1000 })
-      res.cookie('refresh-token', tokens.refreshToken, { maxAge: 10000 })
+
+      res.cookie('access-token', tokens.accessToken, { maxAge: 5000 })
+      res.cookie('refresh-token', tokens.refreshToken, { maxAge: 20000 })
 
       return user
     },
@@ -46,8 +46,8 @@ module.exports = {
 
       const tokens = createTokens(user)
 
-      res.cookie('access-token', tokens.accessToken, { maxAge: 1000 })
-      res.cookie('refresh-token', tokens.refreshToken, { maxAge: 10000 })
+      res.cookie('access-token', tokens.accessToken, { maxAge: 5000 })
+      res.cookie('refresh-token', tokens.refreshToken, { maxAge: 20000 })
 
       return user
     }
