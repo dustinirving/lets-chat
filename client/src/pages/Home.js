@@ -3,39 +3,12 @@ import Conversation from '../components/Conversation'
 import Message from '../components/Message'
 import DropDown from '../components/DropDown'
 import { useHistory, Redirect } from 'react-router-dom'
-import { useQuery, useMutation, gql } from '@apollo/client'
 
 const styles = {
   avatar: {
     width: '100px'
   }
 }
-
-// const USERS = gql`
-//   query users {
-//     users() {
-//       _id
-//     }
-//   }
-// `
-
-const CONVERSATIONS = gql`
-  query conversations {
-    conversations(userId: "5f49225531c7e3538743b4e7") {
-      _id
-    }
-  }
-`
-const CREATE_CONVERSATION = gql`
-  mutation createConversation($creatorId: String!, $recipientId: String!) {
-    createConversation(creatorId: $creatorId, recipientId: $recipientId) {
-      _id
-      users {
-        _id
-      }
-    }
-  }
-`
 
 // simulate conversation with messages
 const messages = [
@@ -71,7 +44,7 @@ const messages = [
   }
 ]
 
-function Home () {
+function Home() {
   return (
     <>
       <div className='card dusty-grass-gradient chat-room animated fadeInRight'>
