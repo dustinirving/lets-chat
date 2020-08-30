@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Conversation from '../components/Conversation'
 import Message from '../components/Message'
+import DropDown from '../components/DropDown'
 import { useHistory, Redirect } from 'react-router-dom'
 import { useQuery, useMutation, gql } from '@apollo/client'
 
@@ -9,6 +10,14 @@ const styles = {
     width: '100px'
   }
 }
+
+// const USERS = gql`
+//   query users {
+//     users() {
+//       _id
+//     }
+//   }
+// `
 
 const CONVERSATIONS = gql`
   query conversations {
@@ -62,6 +71,32 @@ const messages = [
   }
 ]
 
+function Home() {
+
+  // const [users, setUsers] = useState([])
+  // const { loading, error, data } = useQuery(USERS)
+  // const { loading, error, data } = useQuery(CONVERSATIONS)
+
+  // const [createConversation, { data }] = useMutation(
+  //   CREATE_CONVERSATION
+  // )
+  // useEffect(() => {
+  //   createConversation({
+  //     variables: {
+  //       creatorId: '5f491cf149505d012c2f35d3',
+  //       recipientId: '5f4a7ef352c7d64198d452cb'
+  //     }
+  //   })
+  // }, [])
+
+  // const [createConversation, { data }] = useMutation(
+  //   CREATE_CONVERSATION
+  // )
+
+  // useEffect(() => {
+  //   setUsers(data)
+  // }, [])
+
 function Home () {
   // const { loading, error, data } = useQuery(CONVERSATIONS)
 
@@ -75,9 +110,10 @@ function Home () {
     })
   }, [])
 
+
   return (
     <>
-      {console.log(data)}
+      {/* {console.log(data)} */}
       <div className='card dusty-grass-gradient chat-room animated fadeInRight'>
         <div className='card-body'>
           <div className='row px-lg-2 px-2'>
@@ -86,6 +122,15 @@ function Home () {
                 <i className='fas fa-user-alt light-green-text-2'></i> Diego
                 Lehyt
               </h6>
+              <button className="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Users</button>
+
+
+              <div className="dropdown-menu">
+                {messages.map(msg => (
+                  <DropDown />
+                ))}
+              </div>
               <div className='white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue'>
                 <ul className='list-unstyled friend-list'>
                   {messages.map(msg => (

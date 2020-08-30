@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useQuery, useMutation, gql } from '@apollo/client'
 
 const styles = {
   forma: {
@@ -11,9 +12,79 @@ const styles = {
   }
 }
 
+const CREATE_USER = gql`
+  mutation createUser($email: String!, $password: String!) {
+    createUser(email: $email, password: $password){
+      _id
+    }
+  }
+`
+
 const Login = () => {
+
+  const [passwordP, setPasswordP] = useState("")
+  const [emailP, setEmailP] = useState("")
+  const [userP, setUserP] = useState("")
+
+  const [createUser, { data }] = useMutation(
+    CREATE_USER
+  )
+  const USER = gql`
+  query user {
+    user(userId: "5f491cf149505d012c2f35d3") {
+      _id
+      email
+    }
+  }
+`
+  // useEffect(() => {
+  //   createUser({
+  //     variables: {
+  //       email: 'diegolehy00@gmail.com',
+  //       password: '123'
+  //     }
+  //   })
+  // }, [])
+
+  const handlePasswordChange = (e) => {
+    // e.preventDefault();
+    setPasswordP(e.target.value)
+    console.log(passwordP)
+
+  };
+
+  const handleEmailChange = (e) => {
+    // e.preventDefault();
+    setEmailP(e.target.value)
+    console.log(emailP)
+
+  };
+
+  const handleUser = (e) => {
+    // e.preventDefault();
+    setUserP(e.target.value)
+    console.log(userP)
+
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    handleEmailChange(e)
+    handlePasswordChange(e)
+
+    createUser({
+      variables: {
+        email: emailP,
+        password: passwordP
+      }
+    })
+
+    handleUser()
+  }
   return (
     <div className="container" style={styles.conta}>
+      {/* {console.log(data)} */}
       <div className="row">
         <div className="col-12 d-flex justify-content-center animated fadeInRight">
           <div className="card cloudy-knoxville-gradient" style={styles.forma}>
@@ -25,17 +96,17 @@ const Login = () => {
         
             <div className="card-body px-lg-5 pt-0">
 
-              <form className="text-center" action="#!">
+              <form className="text-center" action="#!" onSubmit={handleSubmit}>
 
                 <div className="md-form">
-                  <input type="email" id="materialLoginFormEmail" className="form-control"/>
-                  <label for="materialLoginFormEmail">E-mail</label>
+                  <input type="email" onChange={handleEmailChange} value={emailP} id="email" name="email" className="form-control"/>
+                  <label for="email">E-mail</label>
                 </div>
 
             
                 <div className="md-form">
-                  <input type="password" id="materialLoginFormPassword" className="form-control"/>
-                  <label for="materialLoginFormPassword">Password</label>
+                  <input type="password" onChange={handlePasswordChange} value={passwordP} id="password" name="password" className="form-control"/>
+                  <label for="password">Password</label>
                 </div>
 
                 <div className="d-flex justify-content-around">
