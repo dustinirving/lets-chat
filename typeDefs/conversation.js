@@ -11,7 +11,7 @@ const conversation = gql`
   }
 
   extend type Subscription {
-    newConversation(userId: ID!): Conversation!
+    newConversation(userId: ID!): Conversation
   }
 
   type Conversation {
