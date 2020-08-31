@@ -23,7 +23,7 @@ function App () {
       <Navbar />
       <Route exact path='/' component={Login} />
       <Route exact path='/register' component={Register} />
-      <ProtectedRoute exact path='/home' component={Home} />
+      <Route exact path='/home' component={Home} />
     </Router>
   )
 }
