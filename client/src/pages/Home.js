@@ -3,7 +3,8 @@ import Conversation from '../components/Conversation'
 import Message from '../components/Message'
 import DropDown from '../components/DropDown'
 import { useHistory, Redirect } from 'react-router-dom'
-import { getConversations } from '../store/actions/conversationActions'
+import { getConversations, createConversation } from '../store/actions/conversationActions'
+import { getUsers } from '../store/actions/userActions'
 import { connect } from 'react-redux'
 
 const styles = {
@@ -46,9 +47,12 @@ const messages = [
   }
 ]
 
-function Home ({ getConversations }) {
+function Home ({ getConversations, getUsers, users, conversations, createConversation }) {
   useEffect(() => {
     getConversations()
+    getUsers()
+    // createConversation("5f4c29c160315b3680b887db")
+    console.log(users)
   }, [])
 
   return (
@@ -62,7 +66,7 @@ function Home ({ getConversations }) {
                 Lehyt
               </h6>
               <button
-                className='btn btn-primary dropdown-toggle mr-4'
+                className='btn btn-success dropdown-toggle mr-4'
                 type='button'
                 data-toggle='dropdown'
                 aria-haspopup='true'
@@ -72,8 +76,8 @@ function Home ({ getConversations }) {
               </button>
 
               <div className='dropdown-menu'>
-                {messages.map(msg => (
-                  <DropDown />
+                {users.map(user => (
+                  <DropDown  _id={user._id}/>
                 ))}
               </div>
               <div className='white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue'>
@@ -119,11 +123,12 @@ function Home ({ getConversations }) {
 
 const mapStateToProps = state => {
   return {
-    conversations: state.conversations.conversations
+    conversations: state.conversations.conversations,
+    users: state.users.users
   }
 }
 
-export default connect(mapStateToProps, { getConversations })(Home)
+export default connect(mapStateToProps, { getConversations, createConversation, getUsers })(Home)
 
 // <li className="p-2">
 //     <a href="#" className="d-flex justify-content-between">

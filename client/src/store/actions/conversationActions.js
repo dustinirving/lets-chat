@@ -39,7 +39,7 @@ export const createConversation = ({ recipientId }) => dispatch => {
     .then(data => {
       dispatch({
         type: CREATE_CONVERSATION,
-        payload: data
+        payload: data.conversation
       })
     })
     .catch(err => {

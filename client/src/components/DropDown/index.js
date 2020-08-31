@@ -14,11 +14,11 @@ const styles = {
 }
 
 
-function DropDown() {
+function DropDown(props) {
   
   return (
     <>
-      <a className="dropdown-item" href="#">Action</a>
+      <a className="dropdown-item" href="#">{props._id}</a>
       <div className="dropdown-divider"></div> 
     </>
   );

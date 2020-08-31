@@ -24,7 +24,7 @@ export const getUsers = () => dispatch => {
     .then(data => {
       dispatch({
         type: GET_USERS,
-        payload: data
+        payload: data.users
       })
     })
     .catch(err => {
