@@ -1,7 +1,8 @@
 import {
   GET_CONVERSATIONS,
   GET_CONVERSATION,
-  CREATE_CONVERSATION
+  CREATE_CONVERSATION,
+  CREATE_MESSAGE
 } from '../actions/types'
 
 const initState = {
@@ -18,6 +19,14 @@ export default (state = initState, action) => {
       return {
         ...state,
         conversations: [...state.conversations, action.payload]
+      }
+    case CREATE_MESSAGE:
+      return {
+        ...state,
+        conversation: {
+          ...state.conversation,
+          messages: [...state.conversation.messages, action.payload]
+        }
       }
     default:
       return { ...state }

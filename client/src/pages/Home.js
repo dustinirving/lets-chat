@@ -3,7 +3,12 @@ import Conversation from '../components/Conversation'
 import Message from '../components/Message'
 import DropDown from '../components/DropDown'
 import { useHistory, Redirect } from 'react-router-dom'
-import { getConversations, createConversation } from '../store/actions/conversationActions'
+import {
+  getConversations,
+  getConversation,
+  createConversation,
+  createMessage
+} from '../store/actions/conversationActions'
 import { getUsers } from '../store/actions/userActions'
 import { connect } from 'react-redux'
 
@@ -47,12 +52,25 @@ const messages = [
   }
 ]
 
-function Home ({ getConversations, getUsers, users, conversations, createConversation }) {
+function Home ({
+  users,
+  conversations,
+  conversation,
+  getConversations,
+  getConversation,
+  getUsers,
+  createConversation,
+  createMessage
+}) {
   useEffect(() => {
     getConversations()
     getUsers()
-    // createConversation("5f4c29c160315b3680b887db")
-    console.log(users)
+    createConversation({ recipientId: '5f4c58a213b1c801519b3795' })
+    getConversation({ conversationId: '5f4c5b1941dcc80286abde19' })
+    createMessage({
+      conversationId: '5f4c5b1941dcc80286abde19',
+      content: 'Hi Diego'
+    })
   }, [])
 
   return (
@@ -77,7 +95,7 @@ function Home ({ getConversations, getUsers, users, conversations, createConvers
 
               <div className='dropdown-menu'>
                 {users.map(user => (
-                  <DropDown  _id={user._id}/>
+                  <DropDown _id={user._id} />
                 ))}
               </div>
               <div className='white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue'>
@@ -128,7 +146,13 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getConversations, createConversation, getUsers })(Home)
+export default connect(mapStateToProps, {
+  getConversations,
+  getConversation,
+  getUsers,
+  createConversation,
+  createMessage
+})(Home)
 
 // <li className="p-2">
 //     <a href="#" className="d-flex justify-content-between">

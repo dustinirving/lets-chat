@@ -7,13 +7,9 @@ module.exports = {
     messages: async () => await Message.find()
   },
   Mutation: {
-    createMessage: async (
-      _,
-      { userId, conversationId, content },
-      { pubsub }
-    ) => {
+    createMessage: async (_, { conversationId, content }, { pubsub, req }) => {
       const message = await Message.create({
-        user: userId,
+        user: req.user.userId,
         conversation: conversationId,
         content
       })
