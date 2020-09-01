@@ -76,3 +76,11 @@ export const createMessageMutation = gql`
     }
   }
 `
+
+export const newConversationSubscription = gql`
+  subscription newConversation($userId: ID!) {
+    newConversation(userId: $userId) {
+      _id
+    }
+  }
+`

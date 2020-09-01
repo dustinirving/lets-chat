@@ -5,8 +5,20 @@ import Login from './pages/Login'
 import Navbar from './components/Navbar'
 import Register from './pages/Register'
 import ProtectedRoute from './utils/ProtectedRoute'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import { WebSocketLink } from '@apollo/client/link/ws'
+import { SubscriptionClient } from 'subscriptions-transport-ws'
 
-// import Wrapper from './components/Wrapper'
+const frontend = new SubscriptionClient('ws://localhost:4000/graphql', {
+  reconnect: true
+})
+
+const link = new WebSocketLink(frontend)
+
+const client = new ApolloClient({
+  link,
+  cache: new InMemoryCache()
+})
 
 const styles = {
   headerB: {
@@ -19,12 +31,14 @@ const styles = {
 
 function App () {
   return (
-    <Router style={styles.headerB}>
-      <Navbar />
-      <Route exact path='/' component={Login} />
-      <Route exact path='/register' component={Register} />
-      <ProtectedRoute exact path='/home' component={Home} />
-    </Router>
+    <ApolloProvider client={client}>
+      <Router style={styles.headerB}>
+        <Navbar />
+        <Route exact path='/' component={Login} />
+        <Route exact path='/register' component={Register} />
+        <ProtectedRoute exact path='/home' component={Home} />
+      </Router>
+    </ApolloProvider>
   )
 }
 

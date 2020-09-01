@@ -51,6 +51,7 @@ module.exports = {
       subscribe: withFilter(
         (_, __, { pubsub }) => pubsub.asyncIterator(NEW_CONVERSATION),
         (payload, args) => {
+          console.log('hi')
           return payload.recipientId === args.userId
         }
       )
