@@ -8,7 +8,8 @@ import {
   getConversation,
   createConversation,
   createMessage,
-  newConversation
+  newConversation,
+  newMessage
 } from '../store/actions/conversationActions'
 import { useSubscription, gql } from '@apollo/client'
 import { getUsers } from '../store/actions/userActions'
@@ -61,6 +62,14 @@ const newConversationSubscription = gql`
     }
   }
 `
+const newMessageSubscription = gql`
+  subscription newMessage($conversationId: ID!) {
+    newMessage(conversationId: $conversationId) {
+      _id
+      content
+    }
+  }
+`
 
 function Home ({
   users,
@@ -71,14 +80,24 @@ function Home ({
   getUsers,
   createConversation,
   createMessage,
-  newConversation
+  newConversation,
+  newMessage
 }) {
-  let { data, error, loading } = useSubscription(newConversationSubscription, {
-    variables: { userId: '5f4d377b3eaafe1d70404b5b' }
+  // const { data, error, loading } = useSubscription(
+  //   newConversationSubscription,
+  //   {
+  //     variables: { userId: '5f4d377b3eaafe1d70404b5b' }
+  //   }
+  // )
+
+  const { data, error, loading } = useSubscription(newMessageSubscription, {
+    variables: { conversationId: '5f4c5b1941dcc80286abde19' }
   })
 
   useEffect(() => {
-    if (data) newConversation(data.newConversation)
+    console.log(data)
+    // if (data) newConversation(data.newConversation)
+    if (data) newMessage(data.newMessage)
   }, [data])
 
   useEffect(() => {
@@ -171,7 +190,8 @@ export default connect(mapStateToProps, {
   getUsers,
   createConversation,
   createMessage,
-  newConversation
+  newConversation,
+  newMessage
 })(Home)
 
 // <li className="p-2">

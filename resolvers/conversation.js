@@ -1,5 +1,6 @@
 const { Conversation, User } = require('../models')
 const { withFilter } = require('apollo-server-express')
+const { connection } = require('mongoose')
 const NEW_CONVERSATION = 'NEW_CONVERSATION'
 
 module.exports = {
@@ -51,7 +52,6 @@ module.exports = {
       subscribe: withFilter(
         (_, __, { pubsub }) => pubsub.asyncIterator(NEW_CONVERSATION),
         (payload, args) => {
-          console.log('hi')
           return payload.recipientId === args.userId
         }
       )

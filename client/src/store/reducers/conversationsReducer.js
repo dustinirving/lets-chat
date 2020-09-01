@@ -3,7 +3,8 @@ import {
   GET_CONVERSATION,
   CREATE_CONVERSATION,
   CREATE_MESSAGE,
-  NEW_CONVERSATION
+  NEW_CONVERSATION,
+  NEW_MESSAGE
 } from '../actions/types'
 
 const initState = {
@@ -33,6 +34,14 @@ export default (state = initState, action) => {
       return {
         ...state,
         conversations: [...state.conversations, action.payload]
+      }
+    case NEW_MESSAGE:
+      return {
+        ...state,
+        conversation: {
+          ...state.conversation,
+          messages: [...state.conversation.messages, action.payload]
+        }
       }
     default:
       return { ...state }

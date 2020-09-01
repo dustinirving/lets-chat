@@ -3,14 +3,14 @@ import {
   GET_CONVERSATIONS,
   CREATE_CONVERSATION,
   CREATE_MESSAGE,
-  NEW_CONVERSATION
+  NEW_CONVERSATION,
+  NEW_MESSAGE
 } from './types'
 import {
   getConversationQuery,
   getConversationsQuery,
   createConversationMutation,
-  createMessageMutation,
-  newConversationSubscription
+  createMessageMutation
 } from './queries'
 import { request } from 'graphql-request'
 
@@ -56,7 +56,6 @@ export const createConversation = ({ recipientId }) => dispatch => {
 export const createMessage = ({ conversationId, content }) => dispatch => {
   request('/', createMessageMutation, { conversationId, content })
     .then(data => {
-      console.log(data.createMessage)
       dispatch({
         type: CREATE_MESSAGE,
         payload: data.createMessage
@@ -66,9 +65,15 @@ export const createMessage = ({ conversationId, content }) => dispatch => {
       console.log(err)
     })
 }
-export const newConversation = newConversation => dispatch => {
+export const newConversation = ({ _id }) => dispatch => {
   dispatch({
     type: NEW_CONVERSATION,
-    payload: newConversation
+    payload: { _id }
+  })
+}
+export const newMessage = ({ _id, content }) => dispatch => {
+  dispatch({
+    type: NEW_MESSAGE,
+    payload: { _id, content }
   })
 }
