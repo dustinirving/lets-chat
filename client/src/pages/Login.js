@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../store/actions/userActions'
-import {
-  getConversation,
-  getConversations
-} from '../store/actions/conversationActions'
 
 const styles = {
   forma: {
@@ -57,9 +53,6 @@ const Login = ({ login, user, getConversations }) => {
     setForm({ ...form, [name]: value })
   }
 
-  useEffect(() => {
-    getConversations()
-  }, [])
   const handleSubmit = e => {
     e.preventDefault()
     login(form)
@@ -162,4 +155,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { login, getConversations })(Login)
+export default connect(mapStateToProps, { login })(Login)

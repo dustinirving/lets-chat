@@ -32,10 +32,8 @@ module.exports = {
   Subscription: {
     newMessage: {
       subscribe: withFilter(
-        (_, __, { pubsub }) => pubsub.asyncIterator(NEW_MESSAGE),
+        (_, __, { pubsub, req }) => pubsub.asyncIterator(NEW_MESSAGE),
         (payload, args) => {
-          console.log(payload.conversationId)
-          console.log(args.conversationId)
           return payload.conversationId === args.conversationId
         }
       )
