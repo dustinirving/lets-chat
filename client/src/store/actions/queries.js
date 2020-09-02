@@ -28,6 +28,7 @@ export const loginUserMutation = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       _id
+      email
     }
   }
 `
@@ -50,6 +51,10 @@ export const getConversationQuery = gql`
       messages {
         _id
         content
+        user {
+          _id
+          email
+        }
       }
     }
   }

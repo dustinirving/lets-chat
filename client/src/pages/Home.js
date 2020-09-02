@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Conversation from '../components/Conversation'
-import Message from '../components/Message'
-import DropDown from '../components/DropDown'
+import HomeLayout from '../layouts/HomeLayout'
+import Modal from '../components/Modal'
 import { useHistory, Redirect } from 'react-router-dom'
 import {
   getConversations,
@@ -14,46 +13,6 @@ import {
 import { useSubscription, gql } from '@apollo/client'
 import { getUsers } from '../store/actions/userActions'
 import { connect } from 'react-redux'
-
-const styles = {
-  avatar: {
-    width: '100px'
-  }
-}
-
-// simulate conversation with messages
-const messages = [
-  {
-    email: 'diegolehyt@gmail.com',
-    img:
-      'https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4',
-    content: 'Hola! , como estas?',
-    bool: true
-  },
-  {
-    email: 'dustinirving@gmail.com',
-    img:
-      'https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4',
-    content: 'Hey good and you?',
-    bool: false
-  },
-  {
-    email: 'diegolehyt@gmail.com',
-    img:
-      'https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4',
-    content:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
-    bool: true
-  },
-  {
-    email: 'dustinirving@gmail.com',
-    img:
-      'https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4',
-    content:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
-    bool: false
-  }
-]
 
 const newConversationSubscription = gql`
   subscription newConversation($userId: ID!) {
@@ -103,76 +62,17 @@ function Home ({
   useEffect(() => {
     getConversations()
     getUsers()
-    createConversation({ recipientId: '5f4d0f096583120ceccefb0c' })
-    getConversation({ conversationId: '5f4c5b1941dcc80286abde19' })
-    createMessage({
-      conversationId: '5f4c5b1941dcc80286abde19',
-      content: 'Hi Diego'
-    })
+    // createConversation({ recipientId: '5f4d0f096583120ceccefb0c' })
+    // getConversation({ conversationId: '5f4c5b1941dcc80286abde19' })
+    // createMessage({
+    //   conversationId: '5f4c5b1941dcc80286abde19',
+    //   content: 'Hi Diego'
+    // })
   }, [])
 
   return (
     <>
-      <div className='card dusty-grass-gradient chat-room animated fadeInRight'>
-        <div className='card-body'>
-          <div className='row px-lg-2 px-2'>
-            <div className='col-md-6 col-xl-4 px-0'>
-              <h6 className='font-weight-bold mb-3 text-center text-lg-left'>
-                <i className='fas fa-user-alt light-green-text-2'></i> Diego
-                Lehyt
-              </h6>
-              <button
-                className='btn btn-success dropdown-toggle mr-4'
-                type='button'
-                data-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='false'
-              >
-                Users
-              </button>
-
-              <div className='dropdown-menu'>
-                {users.map(user => (
-                  <DropDown _id={user._id} />
-                ))}
-              </div>
-              <div className='white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue'>
-                <ul className='list-unstyled friend-list'>
-                  {messages.map(msg => (
-                    <Conversation msg={msg} />
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className='col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0'>
-              <div className='chat-message'>
-                <ul className='list-unstyled chat-1 scrollbar-light-blue'>
-                  {messages.map(msg => (
-                    <Message msg={msg} />
-                  ))}
-                </ul>
-                <div className='white'>
-                  <div className='form-group basic-textarea'>
-                    <textarea
-                      className='form-control pl-2 my-0'
-                      id='exampleFormControlTextarea2'
-                      rows='3'
-                      placeholder='Type your message here...'
-                    ></textarea>
-                  </div>
-                </div>
-                <button
-                  type='button'
-                  className='btn btn-outline-green btn-rounded btn-sm waves-effect waves-dark float-right'
-                >
-                  Send
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HomeLayout />
     </>
   )
 }

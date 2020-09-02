@@ -11,7 +11,13 @@ module.exports = {
       )
     },
     conversation: async (_, { conversationId }) =>
-      await Conversation.findById(conversationId).populate('messages')
+      await Conversation.findById(conversationId).populate({
+        path: 'messages',
+        populate: {
+          path: 'user',
+          model: 'User'
+        }
+      })
   },
   Mutation: {
     createConversation: async (_, { recipientId }, { req, pubsub }) => {
