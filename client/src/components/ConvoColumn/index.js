@@ -52,6 +52,9 @@ const ConvoColumn = ({ users, user, conversations }) => {
               <Conversation
                 key={convo._id}
                 id={convo._id}
+                recipient={convo.users.filter(
+                  person => user._id !== person._id
+                )}
                 lastMsg={convo.messages[convo.messages.length - 1]}
               />
             ))}

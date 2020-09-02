@@ -40,8 +40,8 @@ export const getConversations = () => dispatch => {
       console.log(err)
     })
 }
-export const createConversation = ({ recipientId }) => dispatch => {
-  request('/', createConversationMutation, { recipientId })
+export const createConversation = ({ recipientId, message }) => dispatch => {
+  request('/', createConversationMutation, { recipientId, message })
     .then(data => {
       dispatch({
         type: CREATE_CONVERSATION,

@@ -37,6 +37,10 @@ export const getConversationsQuery = gql`
   query conversations {
     conversations {
       _id
+      users {
+        _id
+        email
+      }
       messages {
         _id
         content
@@ -60,9 +64,17 @@ export const getConversationQuery = gql`
   }
 `
 export const createConversationMutation = gql`
-  mutation createConversation($recipientId: ID!) {
-    createConversation(recipientId: $recipientId) {
+  mutation createConversation($recipientId: ID!, $message: String!) {
+    createConversation(recipientId: $recipientId, message: $message) {
       _id
+      users {
+        _id
+        email
+      }
+      messages {
+        _id
+        content
+      }
     }
   }
 `

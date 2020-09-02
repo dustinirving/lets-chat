@@ -1,11 +1,24 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import DropDown from '../DropDown'
-const Modal = ({ users }) => {
+import { createConversation } from '../../store/actions/conversationActions'
+
+const Modal = ({ users, createConversation }) => {
   const [recipient, setRecipient] = useState({ email: '', id: '' })
+  const [form, setForm] = useState({ message: '' })
 
   const handleClick = user => {
-    setRecipient({ email: user.email, id: user.id })
+    setRecipient({ email: user.email, id: user._id })
+  }
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    createConversation({ recipientId: recipient.id, message: form.message })
   }
 
   return (
@@ -31,41 +44,47 @@ const Modal = ({ users }) => {
                 <span aria-hidden='true'>&times;</span>
               </button>
             </div>
-            <div class='modal-body mx-3 pt-0'>
-              <div class='md-form mb-4'>
-                <div className='form-group'>
-                  <button
-                    className='btn btn-success dropdown-toggle mr-4'
-                    type='button'
-                    data-toggle='dropdown'
-                    aria-haspopup='true'
-                    aria-expanded='false'
-                  >
-                    To
-                  </button>
-                  <div className='dropdown-menu'>
-                    {users.map(user => (
-                      <DropDown user={user} handleClick={handleClick} />
-                    ))}
+            <form onSubmit={handleSubmit}>
+              <div class='modal-body mx-3 pt-0'>
+                <div class='md-form mb-4'>
+                  <div className='form-group'>
+                    <button
+                      className='btn btn-success dropdown-toggle mr-4'
+                      type='button'
+                      data-toggle='dropdown'
+                      aria-haspopup='true'
+                      aria-expanded='false'
+                    >
+                      To
+                    </button>
+                    <div className='dropdown-menu'>
+                      {users.map(user => (
+                        <DropDown user={user} handleClick={handleClick} />
+                      ))}
+                    </div>
+                    <input
+                      placeholder='recipient'
+                      value={recipient.email}
+                      style={{ width: '70%' }}
+                    />
                   </div>
-                  <input
-                    placeholder='recipient'
-                    value={recipient.email}
-                    style={{ width: '70%' }}
+                  <textarea
+                    name='message'
+                    value={form.message}
+                    onChange={handleChange}
+                    className='form-control pl-2 my-0'
+                    id='exampleFormControlTextarea2'
+                    rows='3'
+                    placeholder='Type your message here...'
                   />
                 </div>
-                <textarea
-                  name='content'
-                  className='form-control pl-2 my-0'
-                  id='exampleFormControlTextarea2'
-                  rows='3'
-                  placeholder='Type your message here...'
-                ></textarea>
               </div>
-            </div>
-            <div class='modal-footer d-flex justify-content-center'>
-              <button className='btn btn-success'>Send</button>
-            </div>
+              <div class='modal-footer d-flex justify-content-center'>
+                <button className='btn btn-success' type='submit' id='button'>
+                  Send
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -90,4 +109,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Modal)
+export default connect(mapStateToProps, { createConversation })(Modal)

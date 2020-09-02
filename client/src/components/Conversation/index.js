@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './style.css'
+import { connect } from 'react-redux'
+import { getConversation } from '../../store/actions/conversationActions'
 
 const styles = {
   navB: {
@@ -12,7 +14,7 @@ const styles = {
   }
 }
 
-function Conversation ({ lastMsg }) {
+function Conversation ({ lastMsg, recipient, getConversation, id }) {
   return (
     <li className='p-2'>
       <a href='#' className='d-flex justify-content-between'>
@@ -23,8 +25,10 @@ function Conversation ({ lastMsg }) {
           className='avatar rounded-circle d-flex align-self-center mr-2 z-depth-1'
         />
         <div className='text-small'>
-          <strong>Dustin Irving</strong>
-          <p className='last-message text-muted'>{lastMsg}</p>
+          <strong onClick={() => getConversation({ conversationId: id })}>
+            {recipient[0].email}
+          </strong>
+          <p className='last-message text-muted'>{lastMsg.content}</p>
         </div>
         <div className='chat-footer'>
           <p className='text-smaller text-muted mb-0'>Yesterday</p>
@@ -37,4 +41,10 @@ function Conversation ({ lastMsg }) {
   )
 }
 
-export default Conversation
+const mapStateToProps = state => {
+  return {
+    conversation: state.conversations.conversation
+  }
+}
+
+export default connect(mapStateToProps, { getConversation })(Conversation)

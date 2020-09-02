@@ -111,6 +111,12 @@
             .appendTo($(this))
         }
       })
+      $('#button').click(function (e) {
+        e.preventDefault()
+        // Coding
+        $('#modalLoginForm').modal('toggle')
+        return false
+      })
     </script>
   </body>
 </html>

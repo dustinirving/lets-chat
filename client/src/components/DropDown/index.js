@@ -15,7 +15,6 @@ const styles = {
 function DropDown ({ user, handleClick }) {
   return (
     <>
-      {console.log(user)}
       <a className='dropdown-item' href='#' onClick={() => handleClick(user)}>
         {user.email}
       </a>

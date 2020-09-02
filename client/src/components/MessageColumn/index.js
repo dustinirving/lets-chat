@@ -37,7 +37,7 @@ import { createMessage } from '../../store/actions/conversationActions'
 //   }
 // ]
 
-const MessageColumn = ({ messages, conversation }) => {
+const MessageColumn = ({ messages, conversation, createMessage }) => {
   const [form, setForm] = useState({ content: '' })
 
   const handleChange = e => {
@@ -47,9 +47,8 @@ const MessageColumn = ({ messages, conversation }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(form.content)
-    console.log(conversation)
-    // createMessage({ content: form.content, conversationId: conversation._id })
+    createMessage({ content: form.content, conversationId: conversation._id })
+    setForm({ content: '' })
   }
   return (
     <div className='col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0'>
