@@ -3,7 +3,14 @@ import { connect } from 'react-redux'
 import DropDown from '../DropDown'
 import { createConversation } from '../../store/actions/conversationActions'
 
-const Modal = ({ users, createConversation }) => {
+const styles = {
+  miniNav: {
+    heigth: '40px',
+    width: '100%'
+  }
+}
+
+const Modal = ({ user, users, createConversation }) => {
   const [recipient, setRecipient] = useState({ email: '', id: '' })
   const [form, setForm] = useState({ message: '' })
 
@@ -22,7 +29,7 @@ const Modal = ({ users, createConversation }) => {
   }
 
   return (
-    <>
+    <a href='#' className='d-flex justify-content-between'>
       <div
         class='modal fade'
         id='modalLoginForm'
@@ -87,25 +94,68 @@ const Modal = ({ users, createConversation }) => {
             </form>
           </div>
         </div>
-      </div>
+      </div>    
 
-      <div class='text-center'>
+      {/* <div class='text-center'>
+        <a className="nav-link p-0 dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" className="rounded-circle z-depth-0"
+            alt="avatar image" height="35"/>
+        </a>
         <a
           href=''
-          className='btn btn-success btn-rounded mb-4'
+          className='waves-effect waves-light'
           data-toggle='modal'
           data-target='#modalLoginForm'
         >
-          New Message
+          <i className="fas fa-envelope"></i>
         </a>
-      </div>
-    </>
+      </div> */}
+      <nav className="mb-1 navbar navbar-expand-lg navbar-dark success-color lighten-1" style={styles.miniNav}>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent-555">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                <i className='fas fa-user-alt light-green-text-2'></i>
+                {user.email}
+              </a>
+            </li>
+          </ul>
+
+          <ul className="navbar-nav ml-auto nav-flex-icons">
+            <li className="nav-item">
+              <a className="nav-link waves-effect waves-light"
+                  data-toggle='modal'
+                  data-target='#modalLoginForm'
+              >
+                <i className="fas fa-comment"></i>
+              </a>
+            </li>
+            <li className="nav-item avatar dropdown">
+              <a className="nav-link p-0 dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" className="rounded-circle z-depth-0"
+                  alt="avatar image" height="35"/>
+              </a>
+              <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                aria-labelledby="navbarDropdownMenuLink-55">
+                <a className="dropdown-item" href="#">Action</a>
+                <a className="dropdown-item" href="#">Another action</a>
+                <a className="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </a>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    users: state.users.users
+    users: state.users.users,
+    user: state.users.user
   }
 }
 

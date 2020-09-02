@@ -7,39 +7,6 @@ import {
 } from '../../store/actions/conversationActions'
 import { useSubscription, gql } from '@apollo/client'
 
-// simulate conversation with messages
-// const messages = [
-//   {
-//     email: 'diegolehyt@gmail.com',
-//     img:
-//       'https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4',
-//     content: 'Hola! , como estas?',
-//     bool: true
-//   },
-//   {
-//     email: 'dustinirving@gmail.com',
-//     img:
-//       'https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4',
-//     content: 'Hey good and you?',
-//     bool: false
-//   },
-//   {
-//     email: 'diegolehyt@gmail.com',
-//     img:
-//       'https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4',
-//     content:
-//       'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
-//     bool: true
-//   },
-//   {
-//     email: 'dustinirving@gmail.com',
-//     img:
-//       'https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4',
-//     content:
-//       'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
-//     bool: false
-//   }
-// ]
 const newMessageSubscription = gql`
   subscription newMessage($conversationId: ID!, $userId: ID!) {
     newMessage(conversationId: $conversationId, userId: $userId) {
