@@ -8,7 +8,7 @@ module.exports = {
   },
   Mutation: {
     createMessage: async (_, { conversationId, content }, { pubsub, req }) => {
-      const message = await Message.create({
+      const createMessage = await Message.create({
         user: req.user.userId,
         conversation: conversationId,
         content
@@ -18,13 +18,19 @@ module.exports = {
         {
           _id: conversationId
         },
-        { $push: { messages: message._id } },
+        { $push: { messages: createMessage._id } },
         {
           new: true
         }
       )
 
-      pubsub.publish(NEW_MESSAGE, { newMessage: message, conversationId })
+      const message = await Message.findById(createMessage._id).populate('user')
+
+      pubsub.publish(NEW_MESSAGE, {
+        newMessage: message,
+        conversationId,
+        userId: req.user.userId
+      })
 
       return message
     }
@@ -32,17 +38,14 @@ module.exports = {
   Subscription: {
     newMessage: {
       subscribe: withFilter(
-        (_, __, { pubsub, req }) => pubsub.asyncIterator(NEW_MESSAGE),
+        (_, __, { pubsub }) => pubsub.asyncIterator(NEW_MESSAGE),
         (payload, args) => {
-          return payload.conversationId === args.conversationId
+          return (
+            payload.conversationId === args.conversationId &&
+            payload.userId !== args.userId
+          )
         }
       )
     }
   }
 }
-
-// Subscription: {
-//   conversation: {
-//     subscribe: (_, __, { pubsub }) => pubsub.asyncIterator(NEW_MESSAGE), (pa)
-//   }
-// }

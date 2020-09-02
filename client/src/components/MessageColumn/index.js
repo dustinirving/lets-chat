@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Message from '../Message'
 import { connect } from 'react-redux'
-import { createMessage } from '../../store/actions/conversationActions'
+import {
+  createMessage,
+  newMessage
+} from '../../store/actions/conversationActions'
+import { useSubscription, gql } from '@apollo/client'
 
 // simulate conversation with messages
 // const messages = [
@@ -36,8 +40,26 @@ import { createMessage } from '../../store/actions/conversationActions'
 //     bool: false
 //   }
 // ]
+const newMessageSubscription = gql`
+  subscription newMessage($conversationId: ID!, $userId: ID!) {
+    newMessage(conversationId: $conversationId, userId: $userId) {
+      _id
+      content
+      user {
+        _id
+        email
+      }
+    }
+  }
+`
 
-const MessageColumn = ({ messages, conversation, createMessage }) => {
+const MessageColumn = ({
+  messages,
+  conversation,
+  createMessage,
+  user,
+  newMessage
+}) => {
   const [form, setForm] = useState({ content: '' })
 
   const handleChange = e => {
@@ -50,6 +72,16 @@ const MessageColumn = ({ messages, conversation, createMessage }) => {
     createMessage({ content: form.content, conversationId: conversation._id })
     setForm({ content: '' })
   }
+
+  const { data, error, loading } = useSubscription(newMessageSubscription, {
+    variables: { conversationId: conversation._id, userId: user._id }
+  })
+
+  useEffect(() => {
+    console.log(data)
+    if (data) newMessage(data.newMessage)
+  }, [data])
+
   return (
     <div className='col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0'>
       <div className='chat-message'>
@@ -86,8 +118,11 @@ const MessageColumn = ({ messages, conversation, createMessage }) => {
 
 const mapStateToProps = state => {
   return {
-    conversation: state.conversations.conversation
+    conversation: state.conversations.conversation,
+    user: state.users.user
   }
 }
 
-export default connect(mapStateToProps, { createMessage })(MessageColumn)
+export default connect(mapStateToProps, { createMessage, newMessage })(
+  MessageColumn
+)

@@ -1,43 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Conversation from '../Conversation'
 import { connect } from 'react-redux'
 import Modal from '../Modal'
+import { useSubscription, gql } from '@apollo/client'
+import { newConversation } from '../../store/actions/conversationActions'
 
-// simulate conversation with messages
-const messages = [
-  {
-    email: 'diegolehyt@gmail.com',
-    img:
-      'https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4',
-    content: 'Hola! , como estas?',
-    bool: true
-  },
-  {
-    email: 'dustinirving@gmail.com',
-    img:
-      'https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4',
-    content: 'Hey good and you?',
-    bool: false
-  },
-  {
-    email: 'diegolehyt@gmail.com',
-    img:
-      'https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4',
-    content:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
-    bool: true
-  },
-  {
-    email: 'dustinirving@gmail.com',
-    img:
-      'https://avatars2.githubusercontent.com/u/53638843?s=400&u=acd763e9615d8a0f1de970908169e8d5aa045bf7&v=4',
-    content:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
-    bool: false
+const newConversationSubscription = gql`
+  subscription newConversation($userId: ID!) {
+    newConversation(userId: $userId) {
+      _id
+      users {
+        _id
+        email
+      }
+      messages {
+        _id
+        content
+      }
+    }
   }
-]
+`
 
-const ConvoColumn = ({ users, user, conversations }) => {
+const ConvoColumn = ({ user, conversations, newConversation }) => {
+  const { data, error, loading } = useSubscription(
+    newConversationSubscription,
+    {
+      variables: { userId: user._id }
+    }
+  )
+
+  useEffect(() => {
+    if (data) newConversation(data.newConversation)
+  }, [data])
+
   return (
     <>
       <div className='col-md-6 col-xl-4 px-0'>
@@ -73,4 +68,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(ConvoColumn)
+export default connect(mapStateToProps, { newConversation })(ConvoColumn)

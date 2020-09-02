@@ -21,14 +21,6 @@ const newConversationSubscription = gql`
     }
   }
 `
-const newMessageSubscription = gql`
-  subscription newMessage($conversationId: ID!) {
-    newMessage(conversationId: $conversationId) {
-      _id
-      content
-    }
-  }
-`
 
 function Home ({
   users,
@@ -49,25 +41,18 @@ function Home ({
   //   }
   // )
 
-  const { data, error, loading } = useSubscription(newMessageSubscription, {
-    variables: { conversationId: '5f4c5b1941dcc80286abde19' }
-  })
+  // const { data, error, loading } = useSubscription(newMessageSubscription, {
+  //   variables: { conversationId: '5f4c5b1941dcc80286abde19' }
+  // })
 
-  useEffect(() => {
-    console.log(data)
-    // if (data) newConversation(data.newConversation)
-    if (data) newMessage(data.newMessage)
-  }, [data])
+  // useEffect(() => {
+  //   if (data) newConversation(data.newConversation)
+  //   if (data) newMessage(data.newMessage)
+  // }, [data])
 
   useEffect(() => {
     getConversations()
     getUsers()
-    // createConversation({ recipientId: '5f4d0f096583120ceccefb0c' })
-    // getConversation({ conversationId: '5f4c5b1941dcc80286abde19' })
-    // createMessage({
-    //   conversationId: '5f4c5b1941dcc80286abde19',
-    //   content: 'Hi Diego'
-    // })
   }, [])
 
   return (

@@ -74,6 +74,9 @@ export const createConversationMutation = gql`
       messages {
         _id
         content
+        user {
+          _id
+        }
       }
     }
   }
@@ -90,6 +93,10 @@ export const createMessageMutation = gql`
     createMessage(conversationId: $conversationId, content: $content) {
       _id
       content
+      user {
+        _id
+        email
+      }
     }
   }
 `

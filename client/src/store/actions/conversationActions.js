@@ -65,15 +65,15 @@ export const createMessage = ({ conversationId, content }) => dispatch => {
       console.log(err)
     })
 }
-export const newConversation = ({ _id }) => dispatch => {
+export const newConversation = data => dispatch => {
   dispatch({
     type: NEW_CONVERSATION,
-    payload: { _id }
+    payload: data
   })
 }
-export const newMessage = ({ _id, content }) => dispatch => {
+export const newMessage = data => dispatch => {
   dispatch({
     type: NEW_MESSAGE,
-    payload: { _id, content }
+    payload: data
   })
 }
