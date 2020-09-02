@@ -7,7 +7,7 @@ const conversation = gql`
   }
 
   extend type Mutation {
-    createConversation(recipientId: ID!): Conversation!
+    createConversation(recipientId: ID!, message: String!): Conversation!
   }
 
   extend type Subscription {

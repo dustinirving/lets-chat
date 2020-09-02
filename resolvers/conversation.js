@@ -1,4 +1,4 @@
-const { Conversation, User } = require('../models')
+const { Conversation, User, Message } = require('../models')
 const { withFilter } = require('apollo-server-express')
 const { connection } = require('mongoose')
 const NEW_CONVERSATION = 'NEW_CONVERSATION'
@@ -6,19 +6,44 @@ const NEW_CONVERSATION = 'NEW_CONVERSATION'
 module.exports = {
   Query: {
     conversations: async (_, __, { req }) => {
-      return await Conversation.find({ users: req.user.userId }).populate(
-        'messages'
-      )
+      return await Conversation.find({ users: req.user.userId })
+        .populate('users')
+        .populate('messages')
     },
     conversation: async (_, { conversationId }) =>
-      await Conversation.findById(conversationId).populate('messages')
+      await Conversation.findById(conversationId).populate({
+        path: 'messages',
+        populate: {
+          path: 'user',
+          model: 'User'
+        }
+      })
   },
   Mutation: {
-    createConversation: async (_, { recipientId }, { req, pubsub }) => {
+    createConversation: async (
+      _,
+      { recipientId, message },
+      { req, pubsub }
+    ) => {
       const conversation = await Conversation.create({
         users: [req.user.userId, recipientId]
       })
 
+      const newMessage = await Message.create({
+        user: req.user.userId,
+        conversation: conversation._id,
+        content: message
+      })
+
+      await Conversation.findOneAndUpdate(
+        {
+          _id: conversation._id
+        },
+        { $push: { messages: newMessage._id } },
+        {
+          new: true
+        }
+      )
       await User.findOneAndUpdate(
         {
           _id: req.user.userId
@@ -44,7 +69,9 @@ module.exports = {
         recipientId
       })
 
-      return conversation
+      return await Conversation.findById(conversation._id)
+        .populate('users')
+        .populate('messages')
     }
   },
   Subscription: {

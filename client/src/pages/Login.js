@@ -14,38 +14,7 @@ const styles = {
   }
 }
 
-const Login = ({ login, user, getConversations }) => {
-  // const [passwordP, setPasswordP] = useState('')
-  // const [emailP, setEmailP] = useState('')
-  // const [userP, setUserP] = useState('')
-
-  // const handlePasswordChange = e => {
-  //   // e.preventDefault();
-  //   setPasswordP(e.target.value)
-  //   console.log(passwordP)
-  // }
-
-  // const handleEmailChange = e => {
-  //   // e.preventDefault();
-  //   setEmailP(e.target.value)
-  //   console.log(emailP)
-  // }
-
-  // const handleUser = e => {
-  //   // e.preventDefault();
-  //   setUserP(e.target.value)
-  //   console.log(userP)
-  // }
-
-  // const handleSubmit = e => {
-  //   e.preventDefault()
-
-  //   handleEmailChange(e)
-  //   handlePasswordChange(e)
-
-  //   handleUser()
-  // }
-
+const Login = ({ login, user }) => {
   const [form, setForm] = useState({ email: '', password: '' })
 
   const handleChange = e => {
