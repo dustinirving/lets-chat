@@ -16,12 +16,11 @@ const styles = {
 function Message ({ msg, user }) {
   // change bool for current user and compare between the two people inside the conversation
   // "onlineUser.email === props.msg.email"
-
-  // {msg.user._id === user._id }
+  // msg.user._id === user._id
 
   return (
     <>
-      {false ? (
+      {msg.user._id === user._id ? (
         <li className='d-flex justify-content-between mb-4'>
           <img
             style={styles.avatar}

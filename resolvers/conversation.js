@@ -64,14 +64,16 @@ module.exports = {
         }
       )
 
+      const updatedConvo = await Conversation.findById(conversation._id)
+        .populate('users')
+        .populate('messages')
+
       pubsub.publish(NEW_CONVERSATION, {
-        newConversation: conversation,
+        newConversation: updatedConvo,
         recipientId
       })
 
-      return await Conversation.findById(conversation._id)
-        .populate('users')
-        .populate('messages')
+      return updatedConvo
     }
   },
   Subscription: {
