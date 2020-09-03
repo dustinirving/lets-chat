@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import $ from 'jquery'
 import DropDown from '../DropDown'
 import { createConversation } from '../../store/actions/conversationActions'
 import avatars from '../Modal/friends.json'
@@ -33,10 +34,39 @@ const Modal = ({ user, users, createConversation }) => {
     createConversation({ recipientId: recipient.id, message: form.message })
   }
 
+  // Modal
+  const handleModalClose = () => {
+    // get modals
+    const modals = document.getElementsByClassName('modal');
+    // on every modal change state like in hidden modal
+    for(let i=0; i<modals.length; i++) {
+      modals[i].classList.remove('show');
+      modals[i].setAttribute('aria-hidden', 'true');
+      modals[i].setAttribute('style', 'display: none');
+    }
+    // get modal backdrops
+    const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
+    // remove every modal backdrop
+    for(let i=0; i<modalsBackdrops.length; i++) {
+      document.body.removeChild(modalsBackdrops[i]);
+    }
+    const body = document.querySelector('body')
+    body.classList.remove('modal-open')
+
+    // let modal = document.getElementById("modalLoginForm")
+    // modal.classList.remove('show');
+    // modal.removeAttribute("aria-modal")
+    // modal.setAttribute("aria-hidden", true);
+
+
+    // modal.style.display = 'none'
+    // $('#modalLoginForm').modal('hide')
+  }
+
   return (
     <a href='#' className='d-flex justify-content-between'>
       <div
-        class='modal fade'
+        className='modal fade'
         id='modalLoginForm'
         tabindex='-1'
         role='dialog'
@@ -92,7 +122,7 @@ const Modal = ({ user, users, createConversation }) => {
                 </div>
               </div>
               <div class='modal-footer d-flex justify-content-center'>
-                <button className='btn btn-success' type='submit' id='button'>
+                <button className='btn btn-success' type='submit' id='button' onClick={handleModalClose}>
                   Send
                 </button>
               </div>
