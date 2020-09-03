@@ -54,6 +54,11 @@ module.exports = {
       })
 
       return user
+    },
+    logout: async (_, __, { res }) => {
+      res.clearCookie('access-token')
+      res.clearCookie('refresh-token')
+      return true
     }
   }
 }

@@ -9,6 +9,7 @@ const user = gql`
   extend type Mutation {
     createUser(email: String!, password: String!): User!
     login(email: String!, password: String!): User!
+    logout: Boolean
   }
 
   type User {

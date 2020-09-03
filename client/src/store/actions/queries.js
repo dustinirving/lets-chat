@@ -101,3 +101,8 @@ export const createMessageMutation = gql`
     }
   }
 `
+export const logoutUserMutation = gql`
+  mutation logout {
+    logout
+  }
+`
