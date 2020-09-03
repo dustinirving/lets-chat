@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import DropDown from '../DropDown'
 import { createConversation } from '../../store/actions/conversationActions'
+import avatars from '../Modal/friends.json'
 
 const styles = {
   miniNav: {
     heigth: '40px',
     width: '100%'
+  },
+  avatars: {
+    heigth: '20px',
+    width: '20px'
   }
 }
 
@@ -140,9 +145,15 @@ const Modal = ({ user, users, createConversation }) => {
               </a>
               <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                 aria-labelledby="navbarDropdownMenuLink-55">
-                <a className="dropdown-item" href="#">Action</a>
+                {avatars.map(avatar => (
+                  <div className="dropdown-item" >
+                    <img src={avatar.image} style={styles.avatars}/>
+                    {' '}{avatar.name}
+                  </div>
+                ))}
+                {/* <a className="dropdown-item" href="#">Action</a>
                 <a className="dropdown-item" href="#">Another action</a>
-                <a className="dropdown-item" href="#">Something else here</a>
+                <a className="dropdown-item" href="#">Something else here</a> */}
               </div>
             </li>
           </ul>
