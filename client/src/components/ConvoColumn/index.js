@@ -5,6 +5,13 @@ import Modal from '../Modal'
 import { useSubscription, gql } from '@apollo/client'
 import { newConversation } from '../../store/actions/conversationActions'
 
+const styles = {
+  miniNav: {
+    heigth: '40px',
+    backgroundColor: 'green'
+  }
+}
+
 const newConversationSubscription = gql`
   subscription newConversation($userId: ID!) {
     newConversation(userId: $userId) {
@@ -36,12 +43,9 @@ const ConvoColumn = ({ user, conversations, newConversation }) => {
   return (
     <>
       <div className='col-md-6 col-xl-4 px-0'>
-        <h6 className='font-weight-bold mb-3 text-center text-lg-left'>
-          <i className='fas fa-user-alt light-green-text-2'></i>
-          {user.email}
-        </h6>
         <Modal />
-        <div className='white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue'>
+        {/* <a href='#' className='d-flex justify-content-between' style={styles.miniNav}>name</a> */}
+        <div className='white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue' style={{ overflowY: "scroll", height: "70vh"}}>
           <ul className='list-unstyled friend-list'>
             {conversations.map(convo => (
               <Conversation
