@@ -37,6 +37,7 @@ function Conversation ({ lastMsg, recipient, getConversation, id }) {
           </span>
         </div>
       </a>
+      <hr/>
     </li>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Message from '../Message'
 import { connect } from 'react-redux'
 import {
@@ -29,6 +29,8 @@ const MessageColumn = ({
 }) => {
   const [form, setForm] = useState({ content: '' })
 
+  // const messagesDiv = useRef(null)
+
   const handleChange = e => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
@@ -38,6 +40,7 @@ const MessageColumn = ({
     e.preventDefault()
     createMessage({ content: form.content, conversationId: conversation._id })
     setForm({ content: '' })
+    
   }
 
   const { data, error, loading } = useSubscription(newMessageSubscription, {
@@ -49,13 +52,25 @@ const MessageColumn = ({
     if (data) newMessage(data.newMessage)
   }, [data])
 
+  useEffect(()=>{
+    if (conversation.messages.length !== 0) {
+      const messagesDiv = document.getElementById('chatBlock') 
+      messagesDiv.scrollTop = messagesDiv.scrollHeight
+    }
+  }, [conversation])
+
+  // useEffect(()=>{
+  //   let chatBlock = document.getElementById('chatBlock')
+  //   console.log(chatBlock)
+  // }, [conversation])
+
   return (
     <div className='col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0' >
       {
         conversation.messages.length !== 0
         ?
         <>
-          <div className='chat-message' style={{ overflowY: "scroll", height: "60vh"}}>
+          <div className='scrollbar scrollbar-primary chat-message' style={{ overflowY: "scroll", height: "60vh"}} id='chatBlock'>
             <ul className='list-unstyled chat-1 scrollbar-light-blue'>
               {conversation.messages.map(msg => (
                 <Message msg={msg} />

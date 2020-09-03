@@ -44,21 +44,29 @@ const ConvoColumn = ({ user, conversations, newConversation }) => {
     <>
       <div className='col-md-6 col-xl-4 px-0'>
         <Modal />
-        {/* <a href='#' className='d-flex justify-content-between' style={styles.miniNav}>name</a> */}
-        <div className='white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue' style={{ overflowY: "scroll", height: "70vh"}}>
-          <ul className='list-unstyled friend-list'>
-            {conversations.map(convo => (
-              <Conversation
-                key={convo._id}
-                id={convo._id}
-                recipient={convo.users.filter(
-                  person => user._id !== person._id
-                )}
-                lastMsg={convo.messages[convo.messages.length - 1]}
-              />
-            ))}
-          </ul>
-        </div>
+        
+          {
+            true
+            ?
+            <div className='scrollbar scrollbar-primary white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue' style={{ overflowY: "scroll", height: "70vh"}}>
+              <ul className='list-unstyled friend-list'>
+                {conversations.map(convo => (
+                  <Conversation
+                    key={convo._id}
+                    id={convo._id}
+                    recipient={convo.users.filter(
+                      person => user._id !== person._id
+                    )}
+                    lastMsg={convo.messages[convo.messages.length - 1]}
+                  />
+                ))}
+              </ul>
+            </div>  
+            :
+            null
+          }
+
+        
       </div>
     </>
   )
