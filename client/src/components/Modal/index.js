@@ -121,20 +121,19 @@ const Modal = ({ user, users, createConversation }) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent-555">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                <i className='fas fa-user-alt light-green-text-2'></i>
-                {user.email}
+              <a className="nav-link waves-effect waves-light"
+                  data-toggle='modal'
+                  data-target='#modalLoginForm'
+              >
+                <i className="fas fa-comment"></i>
               </a>
             </li>
           </ul>
 
           <ul className="navbar-nav ml-auto nav-flex-icons">
             <li className="nav-item">
-              <a className="nav-link waves-effect waves-light"
-                  data-toggle='modal'
-                  data-target='#modalLoginForm'
-              >
-                <i className="fas fa-comment"></i>
+              <a className="nav-link" href="#">
+                {user.email}
               </a>
             </li>
             <li className="nav-item avatar dropdown">
@@ -151,11 +150,9 @@ const Modal = ({ user, users, createConversation }) => {
                     {' '}{avatar.name}
                   </div>
                 ))}
-                {/* <a className="dropdown-item" href="#">Action</a>
-                <a className="dropdown-item" href="#">Another action</a>
-                <a className="dropdown-item" href="#">Something else here</a> */}
               </div>
             </li>
+ 
           </ul>
         </div>
       </nav>

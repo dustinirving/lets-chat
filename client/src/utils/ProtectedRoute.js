@@ -15,7 +15,13 @@ const ProtectedRoute = props => {
   const renderRoute = routeProps => {
     if (waitingForData) {
       // loading screen
-      return <div>loading..</div>
+      return (
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border text-success" style={{ width: "3rem", height: "3rem", marginTop: "25%" }} role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      )
     }
 
     if (!user) {

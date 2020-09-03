@@ -50,35 +50,46 @@ const MessageColumn = ({
   }, [data])
 
   return (
-    <div className='col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0'>
-      <div className='chat-message'>
-        <ul className='list-unstyled chat-1 scrollbar-light-blue'>
-          {conversation.messages.map(msg => (
-            <Message msg={msg} />
-          ))}
-        </ul>
-        <form onSubmit={handleSubmit}>
-          <div className='white'>
-            <div className='form-group basic-textarea'>
-              <textarea
-                name='content'
-                value={form.content}
-                onChange={handleChange}
-                className='form-control pl-2 my-0'
-                id='exampleFormControlTextarea2'
-                rows='3'
-                placeholder='Type your message here...'
-              ></textarea>
-            </div>
+    <div className='col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0' >
+      {
+        conversation.messages.length !== 0
+        ?
+        <>
+          <div className='chat-message' style={{ overflowY: "scroll", height: "60vh"}}>
+            <ul className='list-unstyled chat-1 scrollbar-light-blue'>
+              {conversation.messages.map(msg => (
+                <Message msg={msg} />
+              ))}
+            </ul>
+
           </div>
-          <button
-            type='submit'
-            className='btn btn-outline-green btn-rounded btn-sm waves-effect waves-dark float-right'
-          >
-            Send
-          </button>
-        </form>
-      </div>
+          <form onSubmit={handleSubmit}>
+            <div className='white'>
+              <div className='form-group basic-textarea'>
+                <textarea
+                  name='content'
+                  value={form.content}
+                  onChange={handleChange}
+                  className='form-control pl-2 my-0'
+                  id='exampleFormControlTextarea2'
+                  rows='3'
+                  placeholder='Type your message here...'
+                ></textarea>
+              </div>
+            </div>
+            <button
+              type='submit'
+              className='btn btn-outline-green btn-rounded btn-sm waves-effect waves-dark float-right'
+            >
+              Send
+            </button>
+          </form>
+        </>
+        :
+        <div>Open a conversation to chat here!</div>     
+
+      }
+
     </div>
   )
 }
