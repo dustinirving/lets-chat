@@ -1,9 +1,10 @@
-import { GET_USER, GET_USERS, SIGNUP, LOGIN } from './types'
+import { GET_USER, GET_USERS, SIGNUP, LOGIN, LOGOUT } from './types'
 import {
   getUserQuery,
   getUsersQuery,
   createUserMutation,
-  loginUserMutation
+  loginUserMutation,
+  logoutUserMutation
 } from './queries'
 import { request } from 'graphql-request'
 
@@ -49,6 +50,17 @@ export const login = ({ email, password }) => dispatch => {
       dispatch({
         type: LOGIN,
         payload: data.login
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+export const logout = () => dispatch => {
+  request('/', logoutUserMutation)
+    .then(() => {
+      dispatch({
+        type: LOGOUT
       })
     })
     .catch(err => {

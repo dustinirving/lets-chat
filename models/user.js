@@ -13,6 +13,11 @@ const UserSchema = new Schema(
       type: String,
       required: true
     },
+    avatar: {
+      type: String,
+      default:
+        'https://vignette.wikia.nocookie.net/spongebobgalaxy/images/0/07/SpongeBob_SquarePants.png/revision/latest?cb=20171228024014'
+    },
     conversations: [
       {
         type: Schema.Types.ObjectId,
