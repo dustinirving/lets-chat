@@ -13,6 +13,7 @@ export const getUserQuery = gql`
     user {
       _id
       email
+      avatar
     }
   }
 `
@@ -22,6 +23,7 @@ export const createUserMutation = gql`
     createUser(email: $email, password: $password) {
       _id
       email
+      avatar
     }
   }
 `
@@ -30,6 +32,7 @@ export const loginUserMutation = gql`
     login(email: $email, password: $password) {
       _id
       email
+      avatar
     }
   }
 `

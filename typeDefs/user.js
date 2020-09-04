@@ -15,6 +15,7 @@ const user = gql`
   type User {
     _id: ID!
     email: String!
+    avatar: String!
     conversations: [Conversation!]!
   }
 `
