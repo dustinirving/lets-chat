@@ -14,12 +14,21 @@ const pubsub = new PubSub()
 
 const app = express()
 
-mongoose.connect(process.env.MONGODB || 'mongodb://localhost/letsChat', {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-})
+// mongoose.connect(process.env.MONGODB || 'mongodb://localhost/letsChat', {
+//   useCreateIndex: true,
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false
+// })
+mongoose.connect(
+  `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.sk3nj.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`,
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  }
+)
 
 app.use(cookieParser())
 
@@ -77,9 +86,9 @@ app.use(express.static('public'))
 //   res.sendFile(path.join(__dirname, '/client/build/index.html'))
 // )
 
-app.get('*', (req, res) => {
+app.use((req, res) =>
   res.sendFile(path.join(__dirname, '/client/build/index.html'))
-})
+)
 
 httpServer.listen(PORT, () => {
   console.log(
