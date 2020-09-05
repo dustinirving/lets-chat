@@ -35,6 +35,7 @@ if (process.env.NODE_ENV === 'production') {
 //     useFindAndModify: false
 //   }
 // )
+const x = 5
 
 app.use(cookieParser())
 
