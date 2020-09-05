@@ -28,6 +28,10 @@ const styles = {
   formS: {
     // marginLeft: '80px',
     marginTop: '10%'
+  },
+  logout: {
+    fontSize: '18px',
+    fontFamily: "'Londrina Solid', cursive"
   }
 }
 
@@ -35,7 +39,11 @@ const styles = {
 function Navbar ({ logout, user }) {
   return (
     <nav className='mb-1 navbar navbar-expand-lg navbar-dark success-color lighten-1'>
-      <Link className='navbar-brand' to='/' style={styles.navB}>
+      <Link
+        className='navbar-brand nav-link waves-effect waves-light'
+        to='/'
+        style={styles.navB}
+      >
         <img
           src='https://raw.githubusercontent.com/dustinirving/lets-chat/master/client/public/reunion.png'
           width='40px'
@@ -68,10 +76,10 @@ function Navbar ({ logout, user }) {
             <li className='nav-item'>
               <a
                 className='nav-link waves-effect waves-light'
+                style={styles.logout}
                 onClick={() => logout()}
               >
-                Logout
-                <i class='fas fa-sign-out-alt fa-lg'></i>
+                Sign Out{'  '} <i class='fas fa-sign-out-alt'></i>
               </a>
             </li>
           </ul>
