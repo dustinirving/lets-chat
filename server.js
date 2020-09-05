@@ -15,26 +15,16 @@ const path = require('path')
 
 const app = express()
 
-// mongoose.connect(process.env.MONGODB || 'mongodb://localhost/letsChat', {
-//   useCreateIndex: true,
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false
-// })
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
 
-mongoose.connect(
-  `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.sk3nj.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`,
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  }
-)
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/letsChat', {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+})
 
 app.use(cookieParser())
 
