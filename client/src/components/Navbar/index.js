@@ -28,14 +28,22 @@ const styles = {
   formS: {
     // marginLeft: '80px',
     marginTop: '10%'
+  },
+  logout: {
+    fontSize: '18px',
+    fontFamily: "'Londrina Solid', cursive"
   }
 }
 
 // Depending on the current path, this component sets the "active" classNameName on the appropriate navigation link item
-function Navbar ({ logout }) {
+function Navbar ({ logout, user }) {
   return (
     <nav className='mb-1 navbar navbar-expand-lg navbar-dark success-color lighten-1'>
-      <Link className='navbar-brand' to='/' style={styles.navB}>
+      <Link
+        className='navbar-brand nav-link waves-effect waves-light'
+        to='/'
+        style={styles.navB}
+      >
         <img
           src='https://raw.githubusercontent.com/dustinirving/lets-chat/master/client/public/reunion.png'
           width='40px'
@@ -44,7 +52,7 @@ function Navbar ({ logout }) {
           style={styles.imgB}
           alt='logo'
         />
-        Lets Chat!
+        Let's Chat
       </Link>
       <button
         className='navbar-toggler'
@@ -57,20 +65,26 @@ function Navbar ({ logout }) {
       >
         <span className='navbar-toggler-icon'></span>
       </button>
-      <div className='collapse navbar-collapse' id='navbarSupportedContent-555'>
-        <ul className='navbar-nav mr-auto'></ul>
+      {user ? (
+        <div
+          className='collapse navbar-collapse'
+          id='navbarSupportedContent-555'
+        >
+          <ul className='navbar-nav mr-auto'></ul>
 
-        <ul className='navbar-nav ml-auto nav-flex-icons'>
-          <li className='nav-item'>
-            <a className='nav-link waves-effect waves-light'>
-              <i className='fas fa-user-alt light-green-text-2'></i>
-            </a>
-          </li>
-          <li>
-            <button onClick={() => logout()}>Logout</button>
-          </li>
-        </ul>
-      </div>
+          <ul className='navbar-nav ml-auto nav-flex-icons'>
+            <li className='nav-item'>
+              <a
+                className='nav-link waves-effect waves-light'
+                style={styles.logout}
+                onClick={() => logout()}
+              >
+                Sign Out{'  '} <i class='fas fa-sign-out-alt'></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      ) : null}
     </nav>
   )
 }

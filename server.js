@@ -2,7 +2,6 @@ require('dotenv').config()
 const http = require('http')
 const { ApolloServer, PubSub } = require('apollo-server-express')
 const mongoose = require('mongoose')
-const cors = require('cors')
 const typeDefs = require('./typeDefs')
 const resolvers = require('./resolvers')
 const express = require('express')
@@ -10,17 +9,31 @@ const cookieParser = require('cookie-parser')
 const { User } = require('./models')
 const { verify } = require('jsonwebtoken')
 const createTokens = require('./auth/createTokens')
-const PORT = 4000 || process.env.PORT
+const PORT = process.env.PORT || 4000
 const pubsub = new PubSub()
 
 const app = express()
 
-mongoose.connect(process.env.MONGODB || 'mongodb://localhost/letsChat', {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-})
+// mongoose.connect(process.env.MONGODB || 'mongodb://localhost/letsChat', {
+//   useCreateIndex: true,
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false
+// })
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'))
+}
+
+mongoose.connect(
+  `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.sk3nj.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`,
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  }
+)
 
 app.use(cookieParser())
 
@@ -71,6 +84,14 @@ server.applyMiddleware({ app })
 
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
+
+// app.use((req, res) =>
+//   res.sendFile(path.join(__dirname, '/client/build/index.html'))
+// )
+
+app.use((req, res) =>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+)
 
 httpServer.listen(PORT, () => {
   console.log(

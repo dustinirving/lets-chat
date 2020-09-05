@@ -37,27 +37,26 @@ const Modal = ({ user, users, createConversation }) => {
   // Modal
   const handleModalClose = () => {
     // get modals
-    const modals = document.getElementsByClassName('modal');
+    const modals = document.getElementsByClassName('modal')
     // on every modal change state like in hidden modal
-    for(let i=0; i<modals.length; i++) {
-      modals[i].classList.remove('show');
-      modals[i].setAttribute('aria-hidden', 'true');
-      modals[i].setAttribute('style', 'display: none');
+    for (let i = 0; i < modals.length; i++) {
+      modals[i].classList.remove('show')
+      modals[i].setAttribute('aria-hidden', 'true')
+      modals[i].setAttribute('style', 'display: none')
     }
     // get modal backdrops
-    const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
+    const modalsBackdrops = document.getElementsByClassName('modal-backdrop')
     // remove every modal backdrop
-    for(let i=0; i<modalsBackdrops.length; i++) {
-      document.body.removeChild(modalsBackdrops[i]);
+    for (let i = 0; i < modalsBackdrops.length; i++) {
+      document.body.removeChild(modalsBackdrops[i])
     }
     const body = document.querySelector('body')
     body.classList.remove('modal-open')
 
-    // let modal = document.getElementById("modalLoginForm")
+    const modal = document.getElementById('modalLoginForm')
     // modal.classList.remove('show');
-    // modal.removeAttribute("aria-modal")
+    modal.removeAttribute('aria-modal')
     // modal.setAttribute("aria-hidden", true);
-
 
     // modal.style.display = 'none'
     // $('#modalLoginForm').modal('hide')
@@ -122,14 +121,19 @@ const Modal = ({ user, users, createConversation }) => {
                 </div>
               </div>
               <div class='modal-footer d-flex justify-content-center'>
-                <button className='btn btn-success' type='submit' id='button' onClick={handleModalClose}>
+                <button
+                  className='btn btn-success'
+                  type='submit'
+                  id='button'
+                  onClick={handleModalClose}
+                >
                   Send
                 </button>
               </div>
             </form>
           </div>
         </div>
-      </div>    
+      </div>
 
       {/* <div class='text-center'>
         <a className="nav-link p-0 dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
@@ -146,43 +150,59 @@ const Modal = ({ user, users, createConversation }) => {
           <i className="fas fa-envelope"></i>
         </a>
       </div> */}
-      <nav className="mb-1 navbar navbar-expand-lg navbar-dark success-color lighten-1" style={styles.miniNav}>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent-555">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <a className="nav-link waves-effect waves-light"
-                  data-toggle='modal'
-                  data-target='#modalLoginForm'
+      <nav
+        className='mb-1 navbar navbar-expand-lg navbar-dark success-color lighten-1'
+        style={styles.miniNav}
+      >
+        <div
+          className='collapse navbar-collapse'
+          id='navbarSupportedContent-555'
+        >
+          <ul className='navbar-nav mr-auto'>
+            <li className='nav-item'>
+              <a
+                className='nav-link waves-effect waves-light'
+                data-toggle='modal'
+                data-target='#modalLoginForm'
               >
-                <i className="fas fa-comment"></i>
+                <i className='fas fa-comment'></i>
               </a>
             </li>
           </ul>
 
-          <ul className="navbar-nav ml-auto nav-flex-icons">
-            <li className="nav-item">
-              <a className="nav-link" href="#">
+          <ul className='navbar-nav ml-auto nav-flex-icons'>
+            <li className='nav-item'>
+              <a className='nav-link' href='#'>
                 {user.email}
               </a>
             </li>
-            <li className="nav-item avatar dropdown">
-              <a className="nav-link p-0 dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <img src="https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4" className="rounded-circle z-depth-0"
-                  alt="avatar image" height="35"/>
+            <li className='nav-item avatar dropdown'>
+              <a
+                className='nav-link p-0 dropdown-toggle'
+                id='navbarDropdownMenuLink-55'
+                data-toggle='dropdown'
+                aria-haspopup='true'
+                aria-expanded='false'
+              >
+                <img
+                  src='https://avatars3.githubusercontent.com/u/59458188?s=460&u=6a9312004c86a260b27601dbf306e7cf0b167e9e&v=4'
+                  className='rounded-circle z-depth-0'
+                  alt='avatar image'
+                  height='35'
+                />
               </a>
-              <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
-                aria-labelledby="navbarDropdownMenuLink-55">
+              <div
+                className='dropdown-menu dropdown-menu-lg-right dropdown-secondary'
+                aria-labelledby='navbarDropdownMenuLink-55'
+              >
                 {avatars.map(avatar => (
-                  <div className="dropdown-item" >
-                    <img src={avatar.image} style={styles.avatars}/>
-                    {' '}{avatar.name}
+                  <div className='dropdown-item'>
+                    <img src={avatar.image} style={styles.avatars} />{' '}
+                    {avatar.name}
                   </div>
                 ))}
               </div>
             </li>
- 
           </ul>
         </div>
       </nav>
