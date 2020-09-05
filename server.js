@@ -72,6 +72,10 @@ server.applyMiddleware({ app })
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
 
+server.use((req, res) =>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+)
+
 httpServer.listen(PORT, () => {
   console.log(
     `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
