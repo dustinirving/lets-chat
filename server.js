@@ -11,6 +11,7 @@ const { verify } = require('jsonwebtoken')
 const createTokens = require('./auth/createTokens')
 const PORT = process.env.PORT || 4000
 const pubsub = new PubSub()
+const path = require('path')
 
 const app = express()
 
