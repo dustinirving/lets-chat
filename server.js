@@ -20,6 +20,11 @@ const app = express()
 //   useUnifiedTopology: true,
 //   useFindAndModify: false
 // })
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'))
+}
+
 mongoose.connect(
   `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.sk3nj.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`,
   {
@@ -79,8 +84,6 @@ server.applyMiddleware({ app })
 
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
-
-app.use(express.static('public'))
 
 // app.use((req, res) =>
 //   res.sendFile(path.join(__dirname, '/client/build/index.html'))
