@@ -26,15 +26,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // yo
-mongoose.connect(
-  `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.sk3nj.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`,
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  }
-)
+// mongoose.connect(
+//   `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.sk3nj.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`,
+//   {
+//     useCreateIndex: true,
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+//   }
+// )
 
 app.use(cookieParser())
 
