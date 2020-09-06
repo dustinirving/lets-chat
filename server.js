@@ -68,7 +68,11 @@ app.use(async (req, res, next) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req, res }) => ({ req, res, pubsub })
+  context: ({ req, res }) => ({ req, res, pubsub }),
+  engine: {
+    reportSchema: true,
+    variant: 'current'
+  }
 })
 
 server.applyMiddleware({ app })
