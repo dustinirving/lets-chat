@@ -9,12 +9,9 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { SubscriptionClient } from 'subscriptions-transport-ws'
 
-const frontend = new SubscriptionClient(
-  'ws://lets-chat123.herokuapp.com/graphql',
-  {
-    reconnect: true
-  }
-)
+const frontend = new SubscriptionClient('ws://localhost:4000/graphql', {
+  reconnect: true
+})
 
 const link = new WebSocketLink(frontend)
 
