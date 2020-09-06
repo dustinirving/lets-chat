@@ -10,7 +10,7 @@ module.exports = function (app) {
     '/graphql',
     createProxyMiddleware({
       target: 'ws://localhost:4000/',
-      changeOrigin: true
+      ws: true
     })
   )
 }
