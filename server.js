@@ -76,7 +76,7 @@ server.applyMiddleware({ app })
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
 
-app.use((req, res) =>
+server.use((req, res) =>
   res.sendFile(path.join(__dirname, '/client/build/index.html'))
 )
 
