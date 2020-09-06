@@ -80,7 +80,7 @@ server.use((req, res) =>
   res.sendFile(path.join(__dirname, '/client/build/index.html'))
 )
 
-httpServer.listen(PORT, () => {
+httpServer.listen(process.env.PORT || 4000, () => {
   console.log(
     `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
   )
