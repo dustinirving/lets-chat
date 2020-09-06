@@ -82,9 +82,9 @@ server.applyMiddleware({ app })
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
 
-app.use((req, res) =>
-  res.sendFile(path.join(__dirname, '/client/build/index.html'))
-)
+// app.use((req, res) =>
+//   res.sendFile(path.join(__dirname, '/client/build/index.html'))
+// )
 
 httpServer.listen(process.env.PORT || 4000, () => {
   console.log(
