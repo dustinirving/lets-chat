@@ -15,7 +15,7 @@ import {
 import { request } from 'graphql-request'
 
 export const getConversation = ({ conversationId }) => dispatch => {
-  request('/', getConversationQuery, { conversationId })
+  request('/graphql', getConversationQuery, { conversationId })
     .then(data => {
       dispatch({
         type: GET_CONVERSATION,
@@ -27,7 +27,7 @@ export const getConversation = ({ conversationId }) => dispatch => {
     })
 }
 export const getConversations = () => dispatch => {
-  request('/', getConversationsQuery)
+  request('/graphql', getConversationsQuery)
     .then(data => {
       if (data.conversations) {
         dispatch({
@@ -41,7 +41,7 @@ export const getConversations = () => dispatch => {
     })
 }
 export const createConversation = ({ recipientId, message }) => dispatch => {
-  request('/', createConversationMutation, { recipientId, message })
+  request('/graphql', createConversationMutation, { recipientId, message })
     .then(data => {
       dispatch({
         type: CREATE_CONVERSATION,
@@ -54,7 +54,7 @@ export const createConversation = ({ recipientId, message }) => dispatch => {
 }
 
 export const createMessage = ({ conversationId, content }) => dispatch => {
-  request('/', createMessageMutation, { conversationId, content })
+  request('/graphql', createMessageMutation, { conversationId, content })
     .then(data => {
       dispatch({
         type: CREATE_MESSAGE,

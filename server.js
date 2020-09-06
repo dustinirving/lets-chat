@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
 
-mongoose.connect('mongodb://localhost/letsChat' || process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/letsChat', {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -84,7 +84,7 @@ app.use((req, res) =>
   res.sendFile(path.join(__dirname, '/client/build/index.html'))
 )
 
-httpServer.listen(PORT, () => {
+httpServer.listen(process.env.PORT || 4000, () => {
   console.log(
     `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
   )
