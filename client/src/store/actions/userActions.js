@@ -9,7 +9,7 @@ import {
 import { request } from 'graphql-request'
 
 export const getUser = () => dispatch => {
-  request('/graphql', getUserQuery)
+  request('/', getUserQuery)
     .then(data => {
       dispatch({
         type: GET_USER,
@@ -21,7 +21,7 @@ export const getUser = () => dispatch => {
     })
 }
 export const getUsers = () => dispatch => {
-  request('/graphql', getUsersQuery)
+  request('/', getUsersQuery)
     .then(data => {
       dispatch({
         type: GET_USERS,
@@ -33,7 +33,7 @@ export const getUsers = () => dispatch => {
     })
 }
 export const createUser = ({ email, password }) => dispatch => {
-  request('/graphql', createUserMutation, { email, password })
+  request('/', createUserMutation, { email, password })
     .then(data => {
       dispatch({
         type: SIGNUP,
@@ -45,7 +45,7 @@ export const createUser = ({ email, password }) => dispatch => {
     })
 }
 export const login = ({ email, password }) => dispatch => {
-  request('/graphql', loginUserMutation, { email, password })
+  request('/', loginUserMutation, { email, password })
     .then(data => {
       dispatch({
         type: LOGIN,
@@ -57,7 +57,7 @@ export const login = ({ email, password }) => dispatch => {
     })
 }
 export const logout = () => dispatch => {
-  request('/graphql', logoutUserMutation)
+  request('/', logoutUserMutation)
     .then(() => {
       dispatch({
         type: LOGOUT

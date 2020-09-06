@@ -12,7 +12,6 @@ const createTokens = require('./auth/createTokens')
 const PORT = process.env.PORT || 4000
 const pubsub = new PubSub()
 const path = require('path')
-const cors = require('cors')
 
 const app = express()
 
@@ -20,14 +19,13 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/letsChat', {
+mongoose.connect('mongodb://localhost/letsChat' || process.env.MONGODB_URI, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
 })
 
-app.use(cors())
 app.use(cookieParser())
 
 app.use(async (req, res, next) => {
@@ -86,7 +84,7 @@ app.use((req, res) =>
   res.sendFile(path.join(__dirname, '/client/build/index.html'))
 )
 
-httpServer.listen(process.env.PORT || 4000, () => {
+httpServer.listen(PORT, () => {
   console.log(
     `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
   )
