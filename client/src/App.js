@@ -15,6 +15,13 @@ const frontend = new SubscriptionClient('ws://localhost:4000/graphql', {
 
 const link = new WebSocketLink(frontend)
 
+// const wsLink = new WebSocketLink({
+//   uri: 'ws://calm-citadel-25445.herokuapp.comgraphql',
+//   options: {
+//     reconnect: true
+//   }
+// })
+
 const client = new ApolloClient({
   link,
   cache: new InMemoryCache()

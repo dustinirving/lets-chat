@@ -11,29 +11,20 @@ const { verify } = require('jsonwebtoken')
 const createTokens = require('./auth/createTokens')
 const PORT = process.env.PORT || 4000
 const pubsub = new PubSub()
+const path = require('path')
 
 const app = express()
-
-// mongoose.connect(process.env.MONGODB || 'mongodb://localhost/letsChat', {
-//   useCreateIndex: true,
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false
-// })
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
 
-mongoose.connect(
-  `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.sk3nj.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`,
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  }
-)
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/letsChat', {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+})
 
 app.use(cookieParser())
 
@@ -77,7 +68,11 @@ app.use(async (req, res, next) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req, res }) => ({ req, res, pubsub })
+  context: ({ req, res }) => ({ req, res, pubsub }),
+  engine: {
+    reportSchema: true,
+    variant: 'current'
+  }
 })
 
 server.applyMiddleware({ app })
@@ -85,15 +80,11 @@ server.applyMiddleware({ app })
 const httpServer = http.createServer(app)
 server.installSubscriptionHandlers(httpServer)
 
-// app.use((req, res) =>
-//   res.sendFile(path.join(__dirname, '/client/build/index.html'))
-// )
-
 app.use((req, res) =>
   res.sendFile(path.join(__dirname, '/client/build/index.html'))
 )
 
-httpServer.listen(PORT, () => {
+httpServer.listen(process.env.PORT || 4000, () => {
   console.log(
     `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
   )
