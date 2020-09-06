@@ -9,11 +9,21 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { SubscriptionClient } from 'subscriptions-transport-ws'
 
-const frontend = new SubscriptionClient('ws://localhost:4000/', {
-  reconnect: true
-})
+const frontend = new SubscriptionClient(
+  'ws://calm-citadel-25445.herokuapp.com/graphql',
+  {
+    reconnect: true
+  }
+)
 
 const link = new WebSocketLink(frontend)
+
+// const wsLink = new WebSocketLink({
+//   uri: 'ws://calm-citadel-25445.herokuapp.comgraphql',
+//   options: {
+//     reconnect: true
+//   }
+// })
 
 const client = new ApolloClient({
   link,
