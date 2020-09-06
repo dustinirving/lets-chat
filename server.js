@@ -12,6 +12,7 @@ const createTokens = require('./auth/createTokens')
 const PORT = process.env.PORT || 4000
 const pubsub = new PubSub()
 const path = require('path')
+const cors = require('cors')
 
 const app = express()
 
@@ -26,6 +27,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/letsChat', {
   useFindAndModify: false
 })
 
+app.use(cors())
 app.use(cookieParser())
 
 app.use(async (req, res, next) => {
