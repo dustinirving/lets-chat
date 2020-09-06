@@ -10,7 +10,7 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { SubscriptionClient } from 'subscriptions-transport-ws'
 
 const frontend = new SubscriptionClient(
-  'ws://calm-citadel-25445.herokuapp.com/graphql',
+  'ws://lets-chat123.herokuapp.com/graphql',
   {
     reconnect: true
   }
